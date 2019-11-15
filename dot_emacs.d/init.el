@@ -319,8 +319,8 @@
   )
 
 (use-package rg
-  :defer t
   :ensure-system-package rg
+  :demand
   )
 
 ;; Writing/Prose Packages
