@@ -1,0 +1,11 @@
+#+TITLE: Readme
+
+This is a repository of my dot files where I use [[https://www.chezmoi.io][chezmoi]] to handle the syncing of dotfiles between machines and locally.
+
+* Initialization
+
+#+BEGIN_SRC sh
+chezmoi init https://github.com/Jesse-Millwood/dots.git
+chezmoi diff
+chezmoi apply
+#+END_SRC
