@@ -64,5 +64,17 @@
   (setq org-agenda-tags-column (- 4 (window-width)))
   (org-agenda-align-tags))
 
+(setq rss-config-path "~/.emacs.d/rss-config.el")
+(defun start-elfeed ()
+  "Start and load Elfeed."
+  (interactive)
+  (if (file-exists-p rss-config-path)
+      (progn
+        (load rss-config-path)
+        (elfeed)
+        )
+    )
+  )
+
 (provide 'extra-emacs-functions)
 ;;; extra-emacs-functions.el ends here
