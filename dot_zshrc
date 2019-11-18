@@ -154,7 +154,13 @@ function sel4_container(){
     local container_path="$HOME/DornerWorksProjects/SSCI/git-repos/seL4-CAmkES-L4v-dockerfiles/"
     if [ -d "${container_path}" ]; then
         echo "Entering docker container ...."
-        make -C ${container_path} user HOST_DIR=$(pwd)
+        if [[ $# > 0 ]]; then
+            echo " with a command"
+            make -C ${container_path} user HOST_DIR=$(pwd) EXEC="bash -c '""$@""'"
+        else
+            echo " at the shell"
+            make -C ${container_path} user HOST_DIR=$(pwd)
+        fi
     else
         echo "Could not find container path"
         echo "searched: ${container_path}"
