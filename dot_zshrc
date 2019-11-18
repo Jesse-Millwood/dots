@@ -160,3 +160,7 @@ function sel4_container(){
         echo "searched: ${container_path}"
     fi
 }
+
+# Local Variables:
+# mode: sh
+# End:
