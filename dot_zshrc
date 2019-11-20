@@ -71,11 +71,12 @@ ENABLE_CORRECTION="true"
 plugins=(
     git
     cp
-    zsh-completions
 )
 
 source $ZSH/oh-my-zsh.sh
-autoload -U compinit && compinit
+autoload -U compinit promptinit
+compinit
+promptinit
 # User configuration
 unsetopt sharehistory
 # export MANPATH="/usr/local/man:$MANPATH"
