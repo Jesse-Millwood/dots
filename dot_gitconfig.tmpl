@@ -14,7 +14,7 @@
         guitool = meld
 [credential]
         {{- if eq .chezmoi.hostname "dwbuntu" }}
-        helper = /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
+        helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
         {{- else if eq .chezmoi.hostname "boxtoo" }}
         helper = libsecret
         {{- end }}
