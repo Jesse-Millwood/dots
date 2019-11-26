@@ -284,11 +284,10 @@
 
 (use-package highlight-parentheses
   :ensure t
-  :config (global-highlight-parentheses-mode t))
-(define-globalized-minor-mode global-highlight-parentheses-mode
-  highlight-parentheses-mode
-  (lambda ()
-    (highlight-parentheses-mode t)))
+  :hook (prog-mode text-mode)
+  :config
+  (global-highlight-parentheses-mode t)
+  )
 
 (use-package dired-hacks-utils
   :ensure t
