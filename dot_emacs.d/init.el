@@ -278,9 +278,11 @@
   :after (multiple-cursors)
   )
 
-(use-package autopair
-  :ensure t
-  :config (autopair-global-mode))
+(use-package electric-pair-mode
+  :hook (prog-mode)
+  :config
+  (electric-pair-mode)
+  )
 
 (use-package highlight-parentheses
   :ensure t
