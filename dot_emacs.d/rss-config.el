@@ -11,6 +11,7 @@
 
 (use-package elfeed
   :ensure t
+  :demand
   :custom
   (url-queue-timeout 300)
   (elfeed-search-filter "@1-week-ago +unread ")
