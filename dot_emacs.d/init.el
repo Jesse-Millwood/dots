@@ -373,7 +373,8 @@
 (use-package yasnippet
   :disabled
   :ensure t
-  :hook (prog-mode . yas-minor-mode)
+  :hook ((prog-mode . yas-minor-mode)
+         (org-mode . yas-minor-mode))
   :custom
   (yas-snippet-dirs '("~/.emacs.d/snippets"))
   )
