@@ -437,6 +437,7 @@
   :ensure t
   :config
   (set-face-foreground 'magit-branch-current "green")
+  (load "~/.emacs.d/gerrit-utils.el")
   :bind (("C-x g" . magit-status)
          ("C-x M-g" . magit-dispatch-popup)
          (:map magit-mode-map
