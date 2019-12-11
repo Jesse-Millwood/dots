@@ -18,6 +18,9 @@
 ;;; Code:
 ;; Package Handling ______________________________________________________________________
 
+;; Set GC threshold high for initializing, reduce later
+(setq gc-cons-threshold (* 50 1000 1000))
+
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.milkbox.net/packages/") t)
@@ -28,9 +31,6 @@
 (add-to-list 'package-archives
              '("org" . "https://orgmode.org/elpa/") t)
 (package-initialize)
-
-(setq gc-cons-threshold 402653184
-      gc-cons-percentage 0.6)
 
 (unless (package-installed-p 'benchmark-init)
   (package-refresh-contents)
@@ -110,6 +110,7 @@
   (inhibit-splash-screen t)
   (visible-bell t "No Audible Bell")
   (indent-tabs-mode nil)
+  (garbage-collection-messages t)
   :config
   (winner-mode)
   (global-hl-line-mode 1)
@@ -402,7 +403,9 @@
   )
 
 (use-package flyspell-correct-ivy
+  :defer nil
   :bind ("C-M-;" . flyspell-correct-wrapper)
+  :after (flyspell ivy)
   :init
   (setq flyspell-correct-interface #'flyspell-correct-ivy)
   )
@@ -649,6 +652,9 @@
   :ensure t
   :defer t
   :commands company-lsp)
+
+;; Reduce gc threshold
+(setq gc-cons-threshold (* 2 1000 1000))
 
 (provide 'init)
 ;;; init.el ends here
