@@ -107,7 +107,7 @@
   (scroll-step 1)
   (scroll-conservatively 1000)
   (scroll-margin 7)
-  (inhibit-splash-screen t)
+  (inhibit-splash-screen nil)
   (visible-bell t "No Audible Bell")
   (indent-tabs-mode nil)
   (garbage-collection-messages t)
