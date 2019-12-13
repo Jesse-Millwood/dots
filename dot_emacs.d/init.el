@@ -448,8 +448,7 @@
 
 (use-package company
   :ensure t
-  ;; :hook
-  ;; (c-mode . company-mode)
+;;  :hook (prog-mode . company-mode)
   :custom
   (company-flx-mode +1)
   (company-show-numbers t)
