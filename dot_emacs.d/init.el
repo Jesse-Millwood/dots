@@ -635,18 +635,16 @@
 
 (use-package lsp-mode
   :ensure t
-  :defer t
+  :hook (python-mode rust-mode ocaml-mode)
   :commands lsp
   )
 
 (use-package lsp-ui
   :ensure t
-  :defer t
   :commands lsp-ui-mode)
 
 (use-package company-lsp
   :ensure t
-  :defer t
   :commands company-lsp)
 
 ;; Reduce gc threshold
