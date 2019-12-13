@@ -403,12 +403,9 @@
   )
 
 (use-package flyspell-correct-ivy
-  :defer nil
-  :bind ("C-M-;" . flyspell-correct-wrapper)
-  :after (flyspell ivy)
+  :after (flyspell)
   :init
-  (setq flyspell-correct-interface #'flyspell-correct-ivy)
-  )
+  (setq flyspell-correct-interface #'flyspell-correct-ivy))
 
 ;; General Project/tools
 
