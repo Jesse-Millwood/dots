@@ -33,6 +33,7 @@
 (use-package dune
   :ensure nil
   :mode "\dune\\'"
+  :commands (dune dune-mode)
   :load-path (lambda () (concat (getenv "OCAML_TOPLEVEL_PATH")
                                 "../../share/emacs/site-lisp"))
   )
