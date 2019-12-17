@@ -5,3 +5,4 @@ dot_emacs.d/**
 !dot_emacs.d/extra-emacs-functions.el
 !dot_emacs.d/rss-config.el
 !dot_emacs.d/gerrit-utils.el
+!dot_emacs.d/ocaml-setup.el
