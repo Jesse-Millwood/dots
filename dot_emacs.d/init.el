@@ -653,7 +653,7 @@
   (python-indent-offset 4)
   )
 
-(if (stringp (getenv "OCAML_TOPLEVEL_PATH"))
+(if (file-exists-p "~/.opam")
     (load "~/.emacs.d/ocaml-setup.el")
   )
 
