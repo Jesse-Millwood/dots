@@ -22,9 +22,8 @@
 
 (use-package merlin
   :ensure t
-  :defer t
+  :hook (tuareg-mode . merlin-mode)
   :config
-  (add-hook 'tuareg-mode-hook 'merlin-mode)
   (with-eval-after-load 'company
     (add-to-list 'company-backends 'merlin-company-backend))
   (add-hook 'merlin-mode-hook 'company-mode)
