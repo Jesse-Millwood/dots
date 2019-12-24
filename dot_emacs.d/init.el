@@ -653,7 +653,8 @@
   (python-indent-offset 4)
   )
 
-(add-to-list 'auto-mode-alist '("\.ml\\'" .  (lambda ()
+;; Conditionally Load OCaml files
+(add-to-list 'auto-mode-alist '("\.\(ml\|mli\)\\'" .  (lambda ()
                                               (if (file-exists-p "~/.opam")
                                                   (progn
                                                     (load "~/.emacs.d/ocaml-setup.el")
