@@ -16,6 +16,7 @@
 
 (use-package tuareg
   :ensure t
+  :mode ("\.ml\\'" . tuareg-mode)
   :custom
   (tuareg-match-patterns-aligned t)
   )
@@ -31,8 +32,8 @@
 
 (use-package dune
   :ensure nil
-  :mode "\dune\\'"
-  :commands (dune dune-mode)
+  :mode ("dune\\'" . dune-mode)
+  :commands (dune-mode)
   :load-path (lambda () (concat (getenv "OCAML_TOPLEVEL_PATH")
                                 "../../share/emacs/site-lisp"))
   )
