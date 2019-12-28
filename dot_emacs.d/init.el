@@ -136,6 +136,9 @@
                                  (abbreviate-file-name (buffer-file-name))
                                "%b")
                              )))
+  :config
+  (add-to-list 'default-frame-alist
+               '(font . "Noto Mono for Powerline-10"))
   )
 
 (use-package ediff
