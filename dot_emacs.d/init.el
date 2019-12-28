@@ -226,6 +226,7 @@
   (centaur-tabs-style "chamfer")
   (centaur-tabs-set-bar 'over)
   (centaur-tabs-set-modified-marker t)
+  (centaur-tabs-modified-marker "●")
   (centaur-tabs-group-by-projectile-project)
   :config
   (centaur-tabs-mode t)
