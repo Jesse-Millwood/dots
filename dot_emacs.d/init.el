@@ -91,20 +91,10 @@
   :demand
   )
 
-(defun get-welcome-buffer ()
-  (let ( (welcome-buf (generate-new-buffer "*Welcome*")))
-    (with-current-buffer welcome-buf
-      (insert "Welcome")
-      (read-only-mode))
-    (get-buffer welcome-buf)
-    ))
-
-(defun initial-buffer-or-nil ()
-  "If a file was passed in the COMMAND-LINE-ARGS return GET-WELCOME-BUFFER, else NIL"
-  (if (< 1 (safe-length command-line-args))
-      nil
-    'get-welcome-buffer
-      ))
+(use-package splash
+  :demand
+  :load-path "~/.emacs.d/splash"
+  )
 
 (use-package emacs
   :demand
@@ -123,7 +113,7 @@
   (scroll-conservatively 1000)
   (scroll-margin 7)
   (inhibit-splash-screen t)
-  (initial-buffer-choice (initial-buffer-or-nil))
+  (initial-buffer-choice (splash-buffer-or-nil))
   (visible-bell t "No Audible Bell")
   (indent-tabs-mode nil)
   (garbage-collection-messages t)
