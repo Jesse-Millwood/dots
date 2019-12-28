@@ -460,7 +460,7 @@
   :ensure t
 ;;  :hook (prog-mode . company-mode)
   :custom
-  (company-flx-mode +1)
+;;  (company-flx-mode +1)
   (company-show-numbers t)
   (company-tooltip-align-annotations 't)
   (company-idle-delay .1)
