@@ -137,8 +137,30 @@
                                "%b")
                              )))
   :config
-  (add-to-list 'default-frame-alist
-               '(font . "Noto Mono for Powerline-10"))
+  (let ((font-list '(("Noto Mono" . 12)
+                     ("Fira Code" . 10)
+                     ("Ubuntu Mono" . 10)
+                     ("DejaVu Sans Mono" . 10)))
+        (font-set-p nil)
+        (font-list-index 0))
+
+    (while (not font-set-p)
+      (when (member (car (nth font-list-index font-list)) (font-family-list))
+        (add-to-list 'default-frame-alist
+                     `(font . ,(format "%s-%i"
+                                       (car (nth font-list-index font-list))
+                                       (cdr (nth font-list-index font-list)))))
+        (setq font-set-p t)
+        )
+      (1+ font-list-index)
+      )
+    (if font-set-p
+        (message "Font Set: %s-%i"
+                 (car (nth font-list-index font-list))
+                 (cdr (nth font-list-index font-list)))
+      (message "Font not set by preference list")
+      )
+    )
   )
 
 (use-package ediff
