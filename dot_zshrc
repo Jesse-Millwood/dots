@@ -105,8 +105,13 @@ export VISUAL="emacs"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Conditional PATH Additions
 if [ -d /opt/Appimages ]; then
     export PATH=/opt/Appimages:$PATH
+fi
+
+if [ -d /usr/local/go ]; then
+    export PATH=/usr/local/go/bin:$PATH
 fi
 
 # DW Support _______________________________________________
