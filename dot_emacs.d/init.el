@@ -142,9 +142,10 @@
                      ("Ubuntu Mono" . 10)
                      ("DejaVu Sans Mono" . 10)))
         (font-set-p nil)
+        (font-not-found-p nil)
         (font-list-index 0))
 
-    (while (not font-set-p)
+    (while (or (not font-set-p) (not font-not-found-p))
       (when (member (car (nth font-list-index font-list)) (font-family-list))
         (add-to-list 'default-frame-alist
                      `(font . ,(format "%s-%i"
@@ -153,6 +154,10 @@
         (setq font-set-p t)
         )
       (1+ font-list-index)
+      (when (> font-list-index (length font-list))
+        (setq font-not-found-p t)
+        (message "Could not find font in FONT-LIST")
+        )
       )
     (if font-set-p
         (message "Font Set: %s-%i"
