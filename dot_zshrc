@@ -8,7 +8,11 @@ ENABLE_CORRECTION="true"
 
 plugins=(
     git
+    cargo
     cp
+    colored-man-pages
+    rsync
+    themes
 )
 
 source $ZSH/oh-my-zsh.sh
