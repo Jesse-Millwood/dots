@@ -39,6 +39,10 @@ if [ -d /usr/local/go ]; then
     export PATH=/usr/local/go/bin:$PATH
 fi
 
+if [ -d $HOME/.local/bin ]; then
+    export PATH=$PATH:$HOME/.local/bin
+fi
+
 # DW Support _______________________________________________
 function get_gerrithooks()
 {
