@@ -18,11 +18,11 @@
   (elfeed-search-title-max-width 120)
   :config
   (setq elfeed-feeds
-	'(("http://xkcd.com/rss.xml" Comics Funny)
-	  ("http://feeds.feedburner.com/oatmealfeed" Comics Funny)
-	  ("http://jvns.ca/atom.xml" Electronics)
-	  ("https://bootlin.com/feed/" Electronics)
-	  ("http://sachachua.com/blog/category/emacs/feed/" Emacs)
+        '(("http://xkcd.com/rss.xml" Comics Funny)
+          ("http://feeds.feedburner.com/oatmealfeed" Comics Funny)
+          ("http://jvns.ca/atom.xml" Electronics)
+          ("https://bootlin.com/feed/" Electronics)
+          ("http://sachachua.com/blog/category/emacs/feed/" Emacs)
           ("https://openstates.org/mi/bills/feed/?status=passed_upper&amp;sort=passed_upper" Politics)
           ("https://bluesabre.org/feed/" Linux)
           ("http://rebble.io/feed.xml" Pebble)
@@ -83,7 +83,7 @@
           ("https://boingboing.net/author/cory_doctorow_1/feed" FOSS)
           ("http://feeds.feedburner.com/cnx-software/blog?format=xml" Electronics)
           ("http://linuxgizmos.com/feed/" Electronics)
-	  ))
+          ))
   )
 
 
