@@ -81,6 +81,8 @@
           ("https://blog.japaric.io/index.xml" Rust)
           ("http://www.politico.com/rss/politics08.xml" Politics)
           ("https://boingboing.net/author/cory_doctorow_1/feed" FOSS)
+          ("http://feeds.feedburner.com/cnx-software/blog?format=xml" Electronics)
+          ("http://linuxgizmos.com/feed/" Electronics)
 	  ))
   )
 
