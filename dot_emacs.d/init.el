@@ -91,11 +91,6 @@
   :demand
   )
 
-(use-package splash
-  :demand
-  :load-path "~/.emacs.d/splash"
-  )
-
 (use-package emacs
   :demand
   :hook
@@ -113,7 +108,6 @@
   (scroll-conservatively 1000)
   (scroll-margin 7)
   (inhibit-splash-screen t)
-  (initial-buffer-choice (splash-buffer-or-nil))
   (visible-bell t "No Audible Bell")
   (indent-tabs-mode nil)
   (garbage-collection-messages t)
@@ -126,6 +120,20 @@
   (global-display-line-numbers-mode)
   (load "~/.emacs.d/extra-emacs-functions.el")
   )
+
+(use-package dashboard
+  :demand t
+  :custom
+  (dashboard-center-content t)
+  (dashboard-startup-banner 'logo)
+  (dashboard-set-heading-icons t)
+  (dashboard-set-file-icons t)
+  (dashboard-set-init-info t)
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-items '((recents . 5)
+                          (projects . 5)
+                          )))
 
 (use-package frame
   :hook (after-make-frame-functions . on-frame-open)
