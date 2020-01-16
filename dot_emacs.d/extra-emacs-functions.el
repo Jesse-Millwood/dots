@@ -78,7 +78,8 @@
 
 (defun set-font-preference ()
     "Set the preference of fonts from a list of alists"
-  (let ((font-list '(("Noto Mono" . 12)
+    (let ((font-list '(("JetBrains Mono" . 12)
+                       ("Noto Mono" . 12)
                      ("Fira Code" . 10)
                      ("Ubuntu Mono" . 10)
                      ("DejaVu Sans Mono" . 10)))
