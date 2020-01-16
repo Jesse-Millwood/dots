@@ -97,8 +97,9 @@
       (if (< font-list-index (length font-list))
           (progn
             (setq font-not-found-p t)
-            (message "Could not find font in FONT-LIST"))
-        (1+ font-list-index)
+            (message "Could your fonts in the FONT-LIST"))
+        (if (not font-set-p)
+            (setq font-list-index (1+ font-list-index)))
         )
       )
     (if font-set-p
