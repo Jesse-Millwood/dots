@@ -404,6 +404,7 @@
 
 (use-package flyspell-correct-ivy
   :after (flyspell)
+  :demand
   :init
   (setq flyspell-correct-interface #'flyspell-correct-ivy))
 
