@@ -117,6 +117,7 @@
   (global-auto-revert-mode)
   (global-display-line-numbers-mode)
   (load "~/.emacs.d/extra-emacs-functions.el")
+  (load "~/.emacs.d/fontsetup.el")
   )
 
 (use-package dashboard

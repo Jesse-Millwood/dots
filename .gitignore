@@ -8,3 +8,4 @@ dot_emacs.d/**
 !dot_emacs.d/ocaml-setup.el
 !dot_emacs.d/splash/splash.el
 !dot_emacs.d/splash/img/emacslogo.svg
+!dot_emacs.d/fontsetup.el
