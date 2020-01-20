@@ -43,16 +43,16 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
-(setq use-package-always-ensure nil)
+(setq use-package-always-ensure t)
 (setq use-package-always-defer t)
 (use-package use-package-ensure-system-package
-  :ensure t
   :demand
   )
 
 ;; Build in Packages
 
 (use-package files
+  :ensure nil
   :demand
   :hook
   (before-save . delete-trailing-whitespace)
@@ -82,12 +82,10 @@
   )
 
 (use-package system-packages
-  :ensure t
   :demand
   )
 
 (use-package bind-key
-  :ensure t
   :demand
   )
 
@@ -136,6 +134,7 @@
                           )))
 
 (use-package frame
+  :ensure nil
   :hook (after-make-frame-functions . on-frame-open)
   :custom
   (frame-title-format
@@ -174,6 +173,7 @@
   )
 
 (use-package window
+  :ensure nil
   :defer nil
   :bind
   (("<C-up>" . shrink-window)
@@ -185,7 +185,6 @@
 
 ;; Visual Packages
 (use-package doom-themes
-  :ensure t
   :defer nil
   :custom
   (doom-themes-enable-bold t)
@@ -195,7 +194,6 @@
   )
 
 (use-package doom-modeline
-  :ensure t
   :hook (after-init . doom-modeline-init)
   :custom
   (doom-modeline-buffer-file-name-stle 'truncate-upto-project)
@@ -220,14 +218,12 @@
 )
 
 (use-package all-the-icons-ivy
-  :ensure t
   :after ivy
   :if window-system
   :config
   (all-the-icons-ivy-setup))
 
 (use-package centaur-tabs
-  :ensure t
   :demand
   :custom
   (centaur-tabs-style "chamfer")
@@ -244,7 +240,6 @@
   )
 
 (use-package counsel
-  :ensure t
   :bind
   (:map global-map
         ("M-y"     . counsel-yank-pop )
@@ -256,14 +251,12 @@
   )
 
 (use-package swiper
-  :ensure t
-    :bind
+  :bind
   (:map global-map
         ("C-s"     . swiper))
   )
 
 (use-package ivy
-  :ensure t
   :custom
   (ivy-use-virtual-buffers nil)
   (ivy-count-format "(%d/%d) ")
@@ -278,11 +271,9 @@
          ("C-S-k" . windmove-down)))
 
 (use-package winum
-  :ensure t
   )
 
 (use-package multiple-cursors
-  :ensure t
   :custom
   (mc/always-run-for-all t)
   :bind (( "C-S-c C-S-c" . mc/edit-lines)
@@ -292,18 +283,17 @@
          ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
 (use-package mc-extras
-  :ensure t
   :after (multiple-cursors)
   )
 
 (use-package electric-pair-mode
+  :ensure nil
   :hook (prog-mode)
   :config
   (electric-pair-mode)
   )
 
 (use-package highlight-parentheses
-  :ensure t
   :demand
   :commands 'highlight-parentheses-mode
   :config
@@ -316,16 +306,15 @@
 
 
 (use-package dired-hacks-utils
-  :ensure t
   )
 
 (use-package dired-subtree
-  :ensure t
   :demand
   :bind (:map dired-mode-map
               ("i" . #'dired-subtree-toggle)))
 
 (use-package whitespace-mode
+  :ensure nil
   :hook (prog-mode LaTeX-mode)
   :custom
   (whitespace-line-column 100)
@@ -350,7 +339,6 @@
 
 ;; Writing/Prose Packages
 (use-package auctex
-  :ensure t
   :hook
   (
    (LaTeX-mode . (lambda () (set-fill-column 100)))
@@ -374,13 +362,11 @@
   )
 
 (use-package academic-phrases
-  :ensure t
   :after (LaTeX auctex)
   )
 
 (use-package langtool
   :defer t
-  :ensure t
   :after (LaTeX auctex)
   :custom
   (langtool-java-bin "/usr/bin/java")
@@ -390,7 +376,6 @@
 
 (use-package yasnippet
   :disabled
-  :ensure t
   :hook ((prog-mode . yas-minor-mode)
          (org-mode . yas-minor-mode))
   :custom
@@ -399,19 +384,17 @@
 
 (use-package yasnippet-snippets
   :disabled
-  :ensure t
   :after (yasnippet)
   )
 
 (use-package ivy-yasnippet
   :disabled
-  :ensure t
   :after (ivy yasnippet)
   )
 
 (use-package flyspell
-;;  :hook
-;;  (latex-mode LaTeX-mode org-mode)
+  :hook
+  (latex-mode LaTeX-mode org-mode)
   :custom
   (ispell-dictionary "american")
   :bind
@@ -427,7 +410,6 @@
 ;; General Project/tools
 
 (use-package projectile
-  :ensure t
   :hook (prog-mode . projectile-mode)
   :custom
   (projectile-enable-caching t)
@@ -442,7 +424,6 @@
   )
 
 (use-package counsel-projectile
-  :ensure t
   :after projectile
   :custom
   (counsel-projectile-switch-project-action 'counsel-projectile-switch-project-action-dired)
@@ -451,7 +432,6 @@
 ;; Magit-mode-bury-buffer passed true kills the buffer
 ;; - gotten from: https://emacs.stackexchange.com/questions/35775/how-to-kill-magit-diffs-buffers-on-quit
 (use-package magit
-  :ensure t
   :config
   (set-face-foreground 'magit-branch-current "green")
   (load "~/.emacs.d/gerrit-utils.el")
@@ -464,7 +444,6 @@
   :config (global-flycheck-mode))
 
 (use-package company
-  :ensure t
 ;;  :hook (prog-mode . company-mode)
   :custom
 ;;  (company-flx-mode +1)
@@ -475,13 +454,9 @@
 
 (use-package realgud
   :defer t
-  :ensure t
   )
 
-
-
 (use-package treemacs
-  :ensure t
   :init
   (with-eval-after-load 'winum
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
@@ -536,13 +511,11 @@
 
 (use-package treemacs-projectile
   :after treemacs projectile
-  :ensure t
   )
 
 ;; Programming Languages Packages
 
 (use-package org
-  :ensure t
   :defer t
   :bind (("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
@@ -590,27 +563,23 @@
 
 (use-package htmlize
   :defer t
-  :ensure t)
+  )
 
 (use-package org-bullets
-  :ensure t
   :defer t
   :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   :config (setq org-bullets-bullet-list
                 '("◉" "◎" "⚫" "○" "►" "◇")))
 
 (use-package bitbake
-  :ensure t
   :mode ("\\.bb\\'" . bitbake-mode)
   )
 
 (use-package dts-mode
-  :ensure t
   :mode ("\\.dts\\'" . dts-mode)
   )
 
 (use-package cmake-mode
-  :ensure t
   :defer t
   :custom
   (cmake-tab-width 4)
@@ -632,7 +601,6 @@
   )
 
 (use-package rust-mode
-  :ensure t
   :mode "\\.rs\\'"
   :init (add-hook 'rust-mode-hook 'lsp)
   )
@@ -642,26 +610,21 @@
   )
 
 (use-package flycheck-rust
-  :ensure t
   :hook (flycheck-mode . flycheck-rust-setup))
 
 (use-package json-mode
-  :ensure t
   :mode "\\.json\\'"
   )
 
 (use-package lsp-mode
-  :ensure t
   :hook (python-mode rust-mode ocaml-mode)
   :commands lsp
   )
 
 (use-package lsp-ui
-  :ensure t
   :commands lsp-ui-mode)
 
 (use-package company-lsp
-  :ensure t
   :commands company-lsp)
 
 (use-package python-mode
