@@ -69,7 +69,7 @@
           ("https://feeds.feedburner.com/ImprobableResearch" Funny)
           ("https://www.livekindly.com/feed/" Vegan)
           ("https://vegnews.com/news/todays-top-stories/feed.rss" Vegan)
-          ("https://embeddedartistry.com/blog?format=RSS" Electronics)
+          ("https://embeddedartistry.com/feed/" Electronics)
           ("https://kernelnewbies.org/Linux_Kernel_Newbies?action=rss_rc&unique=1&ddiffs=1&show_att=1&diffs=1" Linux)
           ("https://groups.google.com/forum/feed/pagedout-notifications/msgs/rss.xml?num=15" Hacking)
           ("https://www.woodtv.com/news/grand-rapids/feed" Local)
