@@ -88,12 +88,15 @@
 
 
 ;; Interested Keywords
-(setq arxiv-interesting-keywords '("mesh" "xen" "virtual" "net" "rust" "lisp" "federated"
-                       "distributed" "analysis" "grid" "energy" "encrypt"
-                       "concurrenc" "trust" "flow" "information" "dift"
-                       "survey" "battery" "risc-v" "concurren" "verification"
-                       "validation" "proof" "capabilitiy" "sel4" "schedul" "memory"
-                       "kernel" "ocaml"))
+(setq arxiv-ee-interesting-keywords '("ct" "uav" "power" "ultrasound" "music"))
+(setq arxiv-cs-interesting-keywords '("mesh" "xen" "virtual" "net" "rust" "lisp" "federated"
+                                      "distributed" "analysis" "grid" "energy" "encrypt"
+                                      "concurrenc" "trust" "flow" "information" "dift"
+                                      "survey" "battery" "risc-v" "concurren" "verification"
+                                      "validation" "proof" "capabilitiy" "sel4" "schedul" "memory"
+                                      "kernel" "ocaml"))
+(setq arxiv-interesting-keywords (append arxiv-cs-interesting-keywords
+                                         arxiv-ee-interesting-keywords))
 (defface arxiv-interesting-face
   '((t :foreground "#00cc00"))
   "Marks a item of interest from the arxiv feed"
@@ -127,15 +130,6 @@
                               :add 'arxiv-ignore-tag
                               :remove 'arxiv-filtered-tag)))
       arxiv-ignore-keywords)
-
-(setq arxiv-ee-interesting-keywords '("ct" "uav" "power" "ultrasound" "music"))
-(mapc (lambda (keyword)
-        (add-hook 'elfeed-new-entry-hook
-          (elfeed-make-tagger :feed-url "https://arxiv\\.org/rss/.*"
-                              :entry-title keyword
-                              :add 'arxiv-filtered-tag
-                              :remove 'arxiv-filtered-tag)))
-      arxiv-ee-interesting-keywords)
 
 (use-package elfeed-goodies
   :ensure t
