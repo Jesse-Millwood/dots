@@ -64,11 +64,30 @@ function setup_xil_env(){
 }
 
 function setup_petalinux_env() {
-    local petalinux_path=/opt/PetaLinux
-    if [ -d ${petalinux_path} ]; then
-        alias start_petalinux="bash --rcfile <(echo '. ~/.bashrc; source /opt/PetaLinux/settings.sh')"
+    PetaLinuxDirs=( $(find /opt -maxdepth 1 -type d -name "PetaLinux-*") )
+    PetaLinuxVers=()
+
+    for d in ${PetaLinuxDirs}; do
+        local bname=$(basename $d)
+        local Version=$(echo ${bname} | cut -d"-" -f2 -)
+        PetaLinuxVers+=${Version}
+    done
+
+    echo "Choose PetaLinux Version:"
+    index=1
+    for v in ${PetaLinuxVers}; do
+        echo "[${index}] ${v}"
+        index=$((index+1))
+    done
+
+    read user_choice
+    chosen_version=${PetaLinuxVers[${user_choice}]}
+    PetaLinuxPath=/opt/PetaLinux-${chosen_version}
+    if [ -d ${PetaLinuxPath} ]; then
+        alias start_petalinux="bash --rcfile <(echo '. ~/.bashrc; source ${PetaLinuxPath}/settings.sh')"
+        echo "Use the alias \"start_petalinux\" to start a bash instance and load the settings"
     else
-        echo "No PetaLinux Install Found at ${petalinux_path}"
+        echo "No PetaLinux install found at ${PetaLinuxPath}"
     fi
 }
 
