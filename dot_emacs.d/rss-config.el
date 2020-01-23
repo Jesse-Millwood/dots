@@ -83,6 +83,7 @@
           ("https://boingboing.net/author/cory_doctorow_1/feed" FOSS)
           ("http://feeds.feedburner.com/cnx-software/blog?format=xml" Electronics)
           ("http://linuxgizmos.com/feed/" Electronics)
+          ("https://blog.toggl.com/category/fun/" Funny)
           ))
   )
 
