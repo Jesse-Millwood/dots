@@ -121,6 +121,7 @@
   )
 
 (use-package dashboard
+  :ensure t
   :demand t
   :custom
   (dashboard-center-content t)
