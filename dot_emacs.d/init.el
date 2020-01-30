@@ -108,7 +108,6 @@
   (inhibit-splash-screen t)
   (visible-bell t "No Audible Bell")
   (indent-tabs-mode nil)
-  (garbage-collection-messages t)
   :config
   (winner-mode)
   (global-hl-line-mode 1)
