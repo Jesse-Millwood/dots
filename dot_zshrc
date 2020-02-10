@@ -30,6 +30,16 @@ export VISUAL="emacs"
 #   export EDITOR='mvim'
 # fi
 
+# Packages outside of oh-my-zsh installed to /usr/local/share/zsh/site-functions
+export ZSH_SITEFUNCTIONS_DIR=/usr/local/share/zsh/site-functions
+if [ -d ${ZSH_SITEFUNCTIONS_DIR}/zsh-autosuggestions ]; then
+    source ${ZSH_SITEFUNCTIONS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+if [ -f ${ZSH_SITEFUNCTIONS_DIR}/zsh-syntax-highlighting.zsh ]; then
+    source ${ZSH_SITEFUNCTIONS_DIR}/zsh-syntax-highlighting.zsh
+fi
+
 # Conditional PATH Additions _______________________________
 if [ -d /opt/Appimages ]; then
     export PATH=/opt/Appimages:$PATH
