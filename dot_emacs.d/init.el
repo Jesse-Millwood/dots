@@ -51,11 +51,16 @@
 
 ;; Build in Packages
 
+(setq delete-trailing-whitespace-filter-list (list 'markdown-mode))
+(defun filtered-delete-trailing-whitespace-hook ()
+  (when (eq (member major-mode delete-trailing-whitespace-filter-list ) nil)
+    (delete-trailing-whitespace)))
+
 (use-package files
   :ensure nil
   :demand
   :hook
-  (before-save . delete-trailing-whitespace)
+  (before-save . filtered-delete-trailing-whitespace-hook)
   :custom
   (backup-by-copying t               "don't clobber symlinks")
   (version-control t                 "version numbers for backup files")
@@ -316,7 +321,7 @@
 
 (use-package whitespace-mode
   :ensure nil
-  :hook (prog-mode LaTeX-mode)
+  :hook (prog-mode LaTeX-mode markdown-mode)
   :custom
   (whitespace-line-column 100)
   :config
