@@ -113,6 +113,7 @@
   (inhibit-splash-screen t)
   (visible-bell t "No Audible Bell")
   (indent-tabs-mode nil)
+  (word-wrap t)
   :config
   (winner-mode)
   (global-hl-line-mode 1)
