@@ -98,7 +98,6 @@
   :demand
   :hook
   (
-   (text-mode . flyspell-mode)
    (text-mode . (lambda () (set-fill-column 100)))
    )
   :bind
@@ -352,7 +351,6 @@
    (LaTeX-mode . LaTeX-math-mode)
    (LaTeX-mode . turn-on-reftex)
    (LaTeX-mode . turn-on-auto-fill)
-   (LaTeX-mode . flyspell-mode)
    )
   :config
   (setq-default TeX-master t)
@@ -399,21 +397,29 @@
   :after (ivy yasnippet)
   )
 
+(use-package diminish)
+
 (use-package flyspell
-  :hook
-  (latex-mode LaTeX-mode org-mode)
   :custom
   (ispell-dictionary "american")
-  :bind
-  (:map flyspell-mouse-map
-        ("<C-down-mouse-3>" . flyspell-correct-word))
+  :hook ((org-mode . flyspell-mode)
+         (latex-mode . flyspell-mode)
+         (LaTeX-mode . flyspell-mode)
+         (markdown-mode . flyspell-mode)
+         (text-mode . flyspell-mode))
   )
 
 (use-package flyspell-correct-ivy
   :after (flyspell)
-  :demand
+  :commands (flyspell-correct-ivy flyspell-correct-wrapper)
+  :bind
+  (:map flyspell-mode-map
+        ("C-;" . flyspell-correct-wrapper)
+   :map flyspell-mouse-map
+   ("<C-down-mouse-3>" . flyspell-correct-word))
   :init
-  (setq flyspell-correct-interface #'flyspell-correct-ivy))
+  (setq flyspell-correct-interface #'flyspell-correct-ivy)
+  )
 
 ;; General Project/tools
 
@@ -529,7 +535,7 @@
          ("C-c a" . org-agenda)
          ("C-c !" . org-time-stamp-inactive)
          )
-  :hook ((org-mode . turn-on-flyspell)
+  :hook (
          (org-mode . company-mode)
          ;;	 (org-finalize-agenda . place-agenda-tags)
          )
