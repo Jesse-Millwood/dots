@@ -339,7 +339,7 @@
   )
 
 (use-package rg
-  :ensure-system-package rg
+  :ensure-system-package (rg . ripgrep)
   :demand
   )
 
@@ -552,27 +552,30 @@
   (org-todo-keywords '((sequence "☛ TODO(t)" "Started(s)" "☀ Current(c)" "|" "✔ DONE(d)")
                        (sequence "⚑ WAITING(w)" "|")
                        (sequence "|" "✘ CANCELED(x)")))
-  (org-default-notes-file "~/Notes/CatchAll.org")
-  (org-refile-targets '((org-agenda-files :maxlevel . 2)))
+  (org-default-notes-file "~/Notes/Notes.org")
+  (org-default-agenda-file "~/Notes/Agenda.org")
+  (org-agenda-files '("~/Notes"))
+  (org-outline-path-complete-in-steps nil)
+  (org-refile-allow-creating-parent-nodes 'confirm)
+  (org-refile-use-outline-path 'file)
+  (org-refile-targets '((org-agenda-files :maxlevel . 3)))
   :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((org . t)
-     (ditaa . t)
-     (python . t)
-     (plantuml . t)
-     (dot . t)))
-  ;; System Orgmode Files
-  (defvar jesse-AgendaDirs '()
-    "The list of directories to scan for orgmode agenda files.")
-  (defun add-to-AgendaDirs (d)
-    "Check if D is a directory and add to list."
-    (if (file-directory-p d)
-        (push d jesse-AgendaDirs)))
-  (mapc 'add-to-AgendaDirs '("~/Notes/DornerWorks"
-                             "~/Agenda/"
-                             "~/Notes/Personal"))
-  (mapc 'load-org-agenda-files-recursively jesse-AgendaDirs)
+;;  (org-babel-do-load-languages
+;;   'org-babel-load-languages
+;;   '((org . t)
+;;     (ditaa . t)
+;;     (python . t)
+;;     (plantuml . t)
+  ;;     (dot . t)))
+  (defvar org-capture-templates
+    '(
+      ("t" "todo" entry (file+headline org-default-notes-file "Tasks")
+       "* TODO %?\n%u\n%a\n")
+      ("n" "Notes" entry (file+headline org-default-notes-file "Notes")
+       "* %? :NOTE: \n%iNoted:%u")
+      )
+    )
+
   )
 
 (use-package htmlize
@@ -602,6 +605,16 @@
 (use-package cc-mode
   :custom
   (c-default-style "stroustrup")
+  )
+
+(use-package rtags
+  :ensure-system-package (rc rdm)
+  )
+(use-package ivy-rtags
+  :after rtags
+  )
+(use-package xcscope
+  :ensure-system-package cscope
   )
 
 (use-package elisp-mode
@@ -645,6 +658,9 @@
   :ensure nil
   :custom
   (python-indent-offset 4)
+  )
+
+(use-package vterm
   )
 
 ;; Conditionally Load OCaml files
