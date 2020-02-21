@@ -380,7 +380,6 @@
   )
 
 (use-package yasnippet
-  :disabled
   :hook ((prog-mode . yas-minor-mode)
          (org-mode . yas-minor-mode))
   :custom
@@ -388,12 +387,10 @@
   )
 
 (use-package yasnippet-snippets
-  :disabled
   :after (yasnippet)
   )
 
 (use-package ivy-yasnippet
-  :disabled
   :after (ivy yasnippet)
   )
 
