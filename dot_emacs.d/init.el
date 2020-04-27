@@ -546,12 +546,12 @@
   (org-ditaa-jar-path "/usr/bin/ditaa")
   (org-plantuml-jar-path "/opt/plantuml.jar")
   ;; Also made it so that the todo state changes are not tracked anymore
-  (org-todo-keywords '((sequence "☛ TODO(t)" "Started(s)" "☀ Current(c)" "|" "✔ DONE(d)")
-                       (sequence "⚑ WAITING(w)" "|")
+  (org-todo-keywords '((sequence "☛ TODO(t)" "Started(s!)" "☀ Current(c!)" "|" "✔ DONE(d!)")
+                       (sequence "⚑ WAITING(w!/!)" "|")
                        (sequence "|" "✘ CANCELED(x)")))
   (org-default-notes-file "~/Notes/Notes.org")
-  (org-default-agenda-file "~/Notes/Agenda.org")
-  (org-agenda-files '("~/Notes"))
+  (org-default-agenda-file "~/Notes/Agenda/Default.org")
+  (org-agenda-files '("~/Notes/Agenda/"))
   (org-outline-path-complete-in-steps nil)
   (org-refile-allow-creating-parent-nodes 'confirm)
   (org-refile-use-outline-path 'file)
@@ -572,7 +572,11 @@
        "* %? :NOTE: \n%iNoted:%u")
       )
     )
-
+  (setq org-agenda-custom-commands
+      '(("c" "Simple agenda view"
+         (
+          (agenda "")
+          (alltodo "")))))
   )
 
 (use-package htmlize
@@ -659,6 +663,27 @@
 
 (use-package vterm
   )
+
+(use-package ibuffer-projectile
+  :config
+  (add-hook 'ibuffer-hook
+    (lambda ()
+      (ibuffer-projectile-set-filter-groups)
+      (unless (eq ibuffer-sorting-mode 'alphabetic)
+        (ibuffer-do-sort-by-alphabetic)))))
+
+(use-package ibuffer-vc
+  )
+
+(use-package gnus
+  :config
+  (setq gnus-select-method '(nnnil ""))
+  (setq gnus-secondary-select-methods
+        '((nnmaildir  "" (directory "~/Maildir"))))
+  (setq mail-sources '((maildir :path "/home/jesse/Maildir"
+                              :subdirs ("cur" "new"))))
+  )
+
 
 ;; Conditionally Load OCaml files
 (add-to-list 'auto-mode-alist '("\.\(ml\|mli\)\\'" .  (lambda ()
