@@ -29,7 +29,7 @@
       (if (< font-list-index (length font-list))
           (progn
             (setq font-not-found-p t)
-            (message "Could your fonts in the FONT-LIST"))
+            (message "Could not find your fonts in the FONT-LIST"))
         (if (not font-set-p)
             (setq font-list-index (1+ font-list-index)))
         )
