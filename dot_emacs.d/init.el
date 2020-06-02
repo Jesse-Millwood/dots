@@ -122,6 +122,8 @@
   (global-display-line-numbers-mode)
   (load "~/.emacs.d/extra-emacs-functions.el")
   (load "~/.emacs.d/fontsetup.el")
+  (add-hook 'after-init-hook #'set-font-preference)
+  (add-hook 'focus-in-hook #'set-font-preference)
   )
 
 (use-package dashboard
@@ -135,6 +137,7 @@
   (dashboard-set-init-info t)
   :config
   (dashboard-setup-startup-hook)
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-items '((recents . 5)
                           (projects . 5)
                           )))
@@ -149,8 +152,6 @@
                                  (abbreviate-file-name (buffer-file-name))
                                "%b")
                              )))
-  :config
-  (set-font-preference)
   )
 
 (use-package ediff
