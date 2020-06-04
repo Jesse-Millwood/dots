@@ -645,6 +645,10 @@
   :mode "\\.json\\'"
   )
 
+(use-package yaml-mode
+  :mode "\\.yaml\\'"
+  )
+
 (use-package lsp-mode
   :hook (python-mode rust-mode ocaml-mode)
   :commands lsp
