@@ -99,6 +99,7 @@
   :hook
   (
    (text-mode . (lambda () (set-fill-column 100)))
+   (focus-in . set-font-preference)
    )
   :bind
   (:map global-map
@@ -122,8 +123,6 @@
   (global-display-line-numbers-mode)
   (load "~/.emacs.d/extra-emacs-functions.el")
   (load "~/.emacs.d/fontsetup.el")
-  (add-hook 'after-init-hook #'set-font-preference)
-  (add-hook 'focus-in-hook #'set-font-preference)
   )
 
 (use-package dashboard
@@ -152,6 +151,8 @@
                                  (abbreviate-file-name (buffer-file-name))
                                "%b")
                              )))
+  :config
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   )
 
 (use-package ediff

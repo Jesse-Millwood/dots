@@ -9,6 +9,7 @@
 
 (defun set-font-preference ()
     "Set the preference of fonts from a list of alists"
+  (interactive)
     (let ((font-list '(("JetBrains Mono" . 12)
                        ("Noto Mono" . 12)
                        ("Fira Code" . 10)
@@ -20,11 +21,16 @@
 
     (while (and (not font-set-p) (not font-not-found-p))
       (when (member (car (nth font-list-index font-list)) (font-family-list))
+        (let ( (font-family (car (nth font-list-index font-list)))
+               (font-size (cdr (nth font-list-index font-list))))
+          (set-frame-font (format "%s-%i"
+                                  font-family
+                                  font-size))
         (add-to-list 'default-frame-alist
                      `(font . ,(format "%s-%i"
-                                       (car (nth font-list-index font-list))
-                                       (cdr (nth font-list-index font-list)))))
-        (setq font-set-p t)
+                                       font-family
+                                       font-size)))
+        (setq font-set-p t))
         )
       (if (< font-list-index (length font-list))
           (progn
