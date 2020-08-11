@@ -8,13 +8,13 @@
 
 
 (defun set-font-preference ()
-    "Set the preference of fonts from a list of alists"
+  "Set the preference of fonts from a list of alists"
   (interactive)
-    (let ((font-list '(("JetBrains Mono" . 12)
-                       ("Noto Mono" . 12)
-                       ("Fira Code" . 10)
-                       ("Ubuntu Mono" . 10)
-                       ("DejaVu Sans Mono" . 10)))
+  (let ((font-list '(("JetBrains Mono" . 12)
+                     ("Noto Mono" . 12)
+                     ("Fira Code" . 10)
+                     ("Ubuntu Mono" . 10)
+                     ("DejaVu Sans Mono" . 10)))
         (font-set-p nil)
         (font-not-found-p nil)
         (font-list-index 0))
@@ -32,22 +32,24 @@
                                        font-size)))
         (setq font-set-p t))
         )
-      (if (< font-list-index (length font-list))
+      (if (and (not font-set-p)
+               (< font-list-index (length font-list)))
           (progn
             (setq font-not-found-p t)
-            (message "Could not find your fonts in the FONT-LIST"))
+            (message "Could not find your fonts in the FONT-LIST")
+            )
         (if (not font-set-p)
             (setq font-list-index (1+ font-list-index)))
         )
       )
-    (if font-set-p
-        (message "Font Set: %s-%i"
-                 (car (nth font-list-index font-list))
-                 (cdr (nth font-list-index font-list)))
-      (message "Font not set by preference list")
-      )
+    ;; (if font-set-p
+    ;;     (message "Font Set: %s-%i"
+    ;;              (car (nth font-list-index font-list))
+    ;;              (cdr (nth font-list-index font-list)))
+    ;;   (message "Font not set by preference list")
+    ;;   )
     )
-    )
+  )
 
 (provide 'fontsetup)
 ;;; fontsetup.el ends here

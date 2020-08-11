@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; rss-config --- Summary
 
 ;;; Commentary:
@@ -6,17 +7,55 @@
 ;; if that happens and Emacs completely becomes unresponsive, press C-g a few times
 ;; maybe run M-x elfeed-unjam after you regain control
 ;; It is also attributed with a bug in a diffrent package that elfeed relies on
-
+;; Resources:
+;;  - https://karthinks.com/blog/lazy-elfeed/
 ;;; Code:
 
 (use-package elfeed
   :ensure t
   :demand
+  ;; :bind
+  ;; (:map elfeed-show-mode-map
+  ;;       ("B" . efleed-show-eww-open)
+  ;;  :map elfeed-search-mode-map
+  ;;       ("B" . efleed-search-eww-open))
   :custom
   (url-queue-timeout 300)
   (elfeed-search-filter "@1-week-ago +unread ")
   (elfeed-search-title-max-width 120)
   :config
+;;  (setq elfeed-show-entry-switch #'elfeed-display-buffer)
+
+;;   (defun elfeed-display-buffer (buf &optional act)
+;;     (pop-to-buffer buf)
+;;     (set-window-text-height (get-buffer-window) (round (* 0.7 (frame-height)))))
+
+;;   (defun elfeed-search-show-entry-pre (&optional lines)
+;;     "Returns a function to scroll forward or back in the Elfeed
+;; search results, displaying entries without switching to them."
+;;     (lambda (times)
+;;       (interactive "p")
+;;       (forward-line (* times (or lines 0)))
+;;       (recenter)
+;;       (call-interactively #'elfeed-search-show-entry)
+;;       (select-window (previous-window))
+;;       (unless elfeed-search-remain-on-entry (forward-line -1))))
+
+;;  (define-key elfeed-search-mode-map (kbd "n") #'(elfeed-search-show-entry-pre +1))
+;;  (define-key elfeed-search-mode-map (kbd "p") #'(elfeed-search-show-entry-pre -1))
+;;  (define-key elfeed-search-mode-map (kbd "M-RET") #'(elfeed-search-show-entry-pre))
+  ;; (defun elfeed-show-eww-open (&optional use-generic-p)
+  ;;   "open with eww"
+  ;;   (interactive "P")
+  ;;   (let ((browse-url-browser-function #'eww-browse-url))
+  ;;     (elfeed-show-visit use-generic-p)))
+
+  ;; (defun elfeed-search-eww-open (&optional use-generic-p)
+  ;;   "open with eww"
+  ;;   (interactive "P")
+  ;;   (let ((browse-url-browser-function #'eww-browse-url))
+  ;;     (elfeed-search-browse-url use-generic-p)))
+
   (setq elfeed-feeds
         '(("http://xkcd.com/rss.xml" Comics Funny)
           ("http://feeds.feedburner.com/oatmealfeed" Comics Funny)
@@ -44,9 +83,7 @@
           ("https://feeds.feedburner.com/EvanSultanik" Hacking)
           ("https://riscv.org/feed" RISCV)
           ("https://blog.system76.com/rss" Linux)
-          ("https://arxiv.org/rss/cs.CL" Arxiv-CS Computation-Language)
           ("https://arxiv.org/rss/cs.CR" Arxiv-CS Cryptography Security)
-          ("https://arxiv.org/rss/cs.CY" Arxiv-CS Society)
           ("https://arxiv.org/rss/cs.GT" Arxiv-CS Game-Theory)
           ("https://arxiv.org/rss/cs.DC" Arxiv-CS Distributed-Computing)
           ("https://arxiv.org/rss/cs.ET" Arxiv-CS Emerging-Technologies)
@@ -54,10 +91,8 @@
           ("https://arxiv.org/rss/cs.GL" Arxiv-CS General-CS)
           ("https://arxiv.org/rss/cs.AR" Arxiv-CS Computer-Architecture)
           ("https://arxiv.org/rss/cs.MA" Arxiv-CS Multi-Agent)
-          ("https://arxiv.org/rss/cs.RO" Arxiv-CS Robotics)
           ("https://arxiv.org/rss/cs.PL" Arxiv-CS Programming-Languages)
           ("https://arxiv.org/rss/cs.PF" Arxiv-CS Performance)
-          ("https://arxiv.org/rss/cs.NA" Arxiv-CS Numerical-Analysis)
           ("https://arxiv.org/rss/cs.NI" Arxiv-CS Networking)
           ("https://arxiv.org/rss/cs.SE" Arxiv-CS Software-Engineering)
           ("https://arxiv.org/rss/cs.SC" Arxiv-CS Symbolic-Computation)
@@ -140,7 +175,8 @@
   :custom
   (elfeed-goodies/entry-pane-position 'bottom)
   :config
-  (elfeed-goodies/setup))
+  ;; (elfeed-goodies/setup)
+  )
 
 (defun elfeed-ivy-filter ()
   (interactive)

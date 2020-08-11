@@ -136,7 +136,6 @@
   (dashboard-set-init-info t)
   :config
   (dashboard-setup-startup-hook)
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-items '((recents . 5)
                           (projects . 5)
                           )))
@@ -151,8 +150,11 @@
                                  (abbreviate-file-name (buffer-file-name))
                                "%b")
                              )))
-  :config
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+  :if (< (length command-line-args) 2)
+  :config (dashboard-setup-startup-hook)
+
+;;  :config
+;;  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   )
 
 (use-package ediff
@@ -644,10 +646,6 @@
 
 (use-package json-mode
   :mode "\\.json\\'"
-  )
-
-(use-package yaml-mode
-  :mode "\\.yaml\\'"
   )
 
 (use-package lsp-mode
