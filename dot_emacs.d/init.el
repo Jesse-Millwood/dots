@@ -380,12 +380,16 @@
   )
 
 (use-package langtool
-  :defer t
+  ;; Note: I was having trouble getting these variables to be set
+  ;;  - Try setq'ing them in scratch or something to see if that works
+  ;;  - I was getting an issue where it said no valid setting
+  ;;    - This means that the variables aren't set in a way that it can figure out what mode to be in
   :after (LaTeX auctex)
-  :custom
-  (langtool-java-bin "/usr/bin/java")
-  (langtool-language-tool-jar "~/opt/LanguageTool-3.9/languagetool-commandline.jar")
-  (langtool-default-language "en-US")
+  :config
+  (setq langtool-java-bin "/usr/bin/java")
+  (setq langtool-java-classpath nil)
+  (setq langtool-language-tool-jar "/opt/LanguageTool-5.1/languagetool-commandline.jar")
+  (setq langtool-default-language "en-US")
   )
 
 (use-package yasnippet
