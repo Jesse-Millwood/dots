@@ -23,7 +23,7 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.milkbox.net/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 ;;; Package Repo with GPL compatible licensed packages
 (add-to-list 'package-archives
              '("marmalade" . "https://marmalade-repo.org/packages/")t)
