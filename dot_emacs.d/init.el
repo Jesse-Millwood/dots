@@ -236,17 +236,15 @@
 (use-package centaur-tabs
   :demand
   :custom
-  (centaur-tabs-style "chamfer")
+  (centaur-tabs-style "rounded")
   (centaur-tabs-set-bar 'over)
   (centaur-tabs-set-modified-marker t)
   (centaur-tabs-modified-marker "●")
   (centaur-tabs-group-by-projectile-project)
+  (centaur-tabs-enable-key-bindings t)
   :config
   (centaur-tabs-mode t)
   (setq centaur-tabs-set-icons (display-graphic-p))
-  :bind
-  ("C-<prior>" . centaur-tabs-backward)
-  ("C-<next>" . centaur-tabs-forward)
   )
 
 (use-package counsel
