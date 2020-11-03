@@ -281,6 +281,10 @@
          ("C-S-i" . windmove-up)
          ("C-S-k" . windmove-down)))
 
+(use-package ace-window
+  :bind (("M-o" . ace-window))
+  )
+
 (use-package winum
   )
 
