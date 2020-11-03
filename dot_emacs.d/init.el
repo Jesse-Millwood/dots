@@ -439,7 +439,17 @@
   (projectile-enable-caching t)
   (projectile-completion-system 'ivy)
   (projectile-switch-project-action 'projectile-dired)
-  (projectile-tags-command "universalctags -Re -f \"%s\" --exclude=%s \"%s\"") ;; tags-file tags-exclude default-directory
+  ;; Built universal ctags from https://github.com/universal-ctags/ctags
+  ;;  ./autogen.sh
+  ;;  ./configure --program-prefix=universal-
+  ;;  make
+  ;;  sudo make install
+  (projectile-tags-command "universal-ctags -Re -f \"%s\" %s \"%s\"")
+  ;; A list of functions for finding project roots
+  (projectile-project-root-files-functions '(projectile-root-top-down
+                                             projectile-root-local
+                                             projectile-root-bottom-up
+                                             projectile-root-top-down-recurring))
   :config
   (counsel-projectile-mode)
   :bind
