@@ -270,6 +270,9 @@
   (ivy-count-format "(%d/%d) ")
   :config
   (ivy-mode 1)
+  (if (equal (face-background 'ivy-current-match) (face-foreground 'ivy-modified-buffer))
+      (set-face-foreground 'ivy-modified-buffer "#fb4934")
+      )
   )
 
 (use-package windmove
