@@ -707,15 +707,7 @@
 (use-package ibuffer-vc
   )
 
-(use-package gnus
-  :config
-  (setq gnus-select-method '(nnnil ""))
-  (setq gnus-secondary-select-methods
-        '((nnmaildir  "" (directory "~/Maildir"))))
-  (setq mail-sources '((maildir :path "/home/jesse/Maildir"
-                              :subdirs ("cur" "new"))))
-  )
-
+(load "~/.emacs.d/gnus.el")
 
 ;; Conditionally Load OCaml files
 (add-to-list 'auto-mode-alist '("\.\(ml\|mli\)\\'" .  (lambda ()
