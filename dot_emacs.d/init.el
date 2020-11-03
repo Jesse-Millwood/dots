@@ -687,6 +687,15 @@
 (use-package vterm
   )
 
+(use-package super-save
+  :custom
+  (super-save-auto-save-when-idle t)
+  (super-save-remote-files nil)
+  (super-save-exclude '(".gpg"))
+  :config
+  (super-save-mode +1)
+  )
+
 (use-package ibuffer-projectile
   :config
   (add-hook 'ibuffer-hook
