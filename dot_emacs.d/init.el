@@ -690,6 +690,10 @@
   (python-indent-offset 4)
   )
 
+(use-package csharp-mode
+  :ensure nil
+  )
+
 (use-package vterm
   )
 
