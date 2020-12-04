@@ -30,6 +30,13 @@
 [core]
         editor = emacs -nw
 
+{{- if eq .chezmoi.hostname "dwbuntu" }}
+[http]
+	sslVerify = true
+[http "https://gitlab.dornerworks.com/"]
+	sslCAInfo = /home/jesse/.local/etc/ssl/certs/git-dw.pem
+
+{{- end }}
+
 # Local Variables:
 # mode: conf
-# End:
