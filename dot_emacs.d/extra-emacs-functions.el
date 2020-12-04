@@ -3,29 +3,52 @@
 ;;; Extra Emacs functions.
 ;;; Code:
 
-(defun yank-single-line ()
+(defun jcm-yank-single-line ()
   "Useful for yanking from a pdf that inserts unnecessary newlines."
   (interactive)
   (insert (subst-char-in-string ?\n ? (substring-no-properties (current-kill 0))))
   )
-;; kill the name of the buffer to the kill ring
-(defun copy-full-path-to-kill-ring ()
-  "copy buffer's full path to kill ring"
-  (interactive)
-  (when buffer-file-name
-    (kill-new (file-truename buffer-file-name))))
+
 ;; Grabed from http://emacsredux.com/blog/2013/03/27/copy-filename-to-the-clipboard/
-(defun copy-file-name-to-clipboard ()
+(defun jcm-copy-file-name-to-clipboard (relative-to-root-p)
   "Copy the current buffer file name to the clipboard."
-  (interactive)
+  (interactive (list (y-or-n-p "Relative to project? ")))
+
   (let ((filename (if (equal major-mode 'dired-mode)
                       default-directory
-                    (buffer-file-name))))
-    (when filename
-      (kill-new filename)
-      (message "Copied buffer file name '%s' to the clipboard." filename))))
+                    (abbreviate-file-name (buffer-file-name))))
+        (project-root (cdr (project-current)))
+        (project-root-dir
+         (file-name-nondirectory
+          (directory-file-name
+           (file-name-directory (cdr (project-current)))))))
 
-(defun sudo-find-file (file-name)
+    (when filename
+      (message "Relative Path: %s" (file-relative-name filename project-root))
+      (message "With project prefix: %s"
+               (file-name-nondirectory
+                (directory-file-name
+                 (file-name-directory project-root)))))
+
+    (when filename
+      (if relative-to-root-p
+          (progn
+            (kill-new (concat
+                       (file-name-as-directory project-root-dir)
+                       (file-relative-name filename project-root)))
+            (message "Copied '%s' to the clipboard"
+                     (concat (file-name-as-directory project-root-dir)
+                             (file-relative-name filename project-root)))
+            )
+        (progn
+      (kill-new filename)
+          (message "Copied '%s' to the clipboard" filename)
+          ))
+      )
+ ))
+
+
+(defun jcm-sudo-find-file (file-name)
   "Like find file, but opens FILE-NAME as root."
   (interactive "FSudo Find File: ")
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
@@ -65,13 +88,14 @@
   (org-agenda-align-tags))
 
 (setq rss-config-path "~/.emacs.d/rss-config.el")
-(defun start-elfeed ()
+(defun jcm-start-elfeed ()
   "Start and load Elfeed."
   (interactive)
   (if (file-exists-p rss-config-path)
       (progn
         (load rss-config-path)
         (elfeed)
+        (elfeed-goodies/setup)
         )
     )
   )
