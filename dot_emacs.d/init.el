@@ -633,8 +633,10 @@
   )
 
 (use-package cc-mode
-  :custom
-  (c-default-style "stroustrup")
+   :config
+   (add-hook 'c-mode-common-hook
+    (lambda ()
+       (c-set-style "stroustrup")))
   )
 
 (use-package rtags
