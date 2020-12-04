@@ -14,47 +14,11 @@
 (use-package elfeed
   :ensure t
   :demand
-  ;; :bind
-  ;; (:map elfeed-show-mode-map
-  ;;       ("B" . efleed-show-eww-open)
-  ;;  :map elfeed-search-mode-map
-  ;;       ("B" . efleed-search-eww-open))
   :custom
   (url-queue-timeout 300)
   (elfeed-search-filter "@1-week-ago +unread ")
   (elfeed-search-title-max-width 120)
   :config
-;;  (setq elfeed-show-entry-switch #'elfeed-display-buffer)
-
-;;   (defun elfeed-display-buffer (buf &optional act)
-;;     (pop-to-buffer buf)
-;;     (set-window-text-height (get-buffer-window) (round (* 0.7 (frame-height)))))
-
-;;   (defun elfeed-search-show-entry-pre (&optional lines)
-;;     "Returns a function to scroll forward or back in the Elfeed
-;; search results, displaying entries without switching to them."
-;;     (lambda (times)
-;;       (interactive "p")
-;;       (forward-line (* times (or lines 0)))
-;;       (recenter)
-;;       (call-interactively #'elfeed-search-show-entry)
-;;       (select-window (previous-window))
-;;       (unless elfeed-search-remain-on-entry (forward-line -1))))
-
-;;  (define-key elfeed-search-mode-map (kbd "n") #'(elfeed-search-show-entry-pre +1))
-;;  (define-key elfeed-search-mode-map (kbd "p") #'(elfeed-search-show-entry-pre -1))
-;;  (define-key elfeed-search-mode-map (kbd "M-RET") #'(elfeed-search-show-entry-pre))
-  ;; (defun elfeed-show-eww-open (&optional use-generic-p)
-  ;;   "open with eww"
-  ;;   (interactive "P")
-  ;;   (let ((browse-url-browser-function #'eww-browse-url))
-  ;;     (elfeed-show-visit use-generic-p)))
-
-  ;; (defun elfeed-search-eww-open (&optional use-generic-p)
-  ;;   "open with eww"
-  ;;   (interactive "P")
-  ;;   (let ((browse-url-browser-function #'eww-browse-url))
-  ;;     (elfeed-search-browse-url use-generic-p)))
 
   (setq elfeed-feeds
         '(("http://xkcd.com/rss.xml" Comics Funny)
@@ -124,6 +88,7 @@
           ("https://genode.org/news/aggregator/rss" Programming)
           ("https://genodians.org/rss" Programming)
           ("https://emacsredux.com/atom.xml" Emacs)
+          ("http://feeds.urbandictionary.com/UrbanWordOfTheDay" Funny)
           ))
   )
 
@@ -178,7 +143,7 @@
   :custom
   (elfeed-goodies/entry-pane-position 'bottom)
   :config
-  ;; (elfeed-goodies/setup)
+  (elfeed-goodies/setup)
   )
 
 (defun elfeed-ivy-filter ()
