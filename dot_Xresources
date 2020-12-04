@@ -1,1 +1,8 @@
-#include ".Xresources.d/colors"
+
+!!!!!!!!!
+! XTERM !
+!!!!!!!!!
+
+xterm*faceName: Fira Code
+xterm*faceSize: 12
+xterm*renderFont: true
