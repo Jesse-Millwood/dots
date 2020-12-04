@@ -720,6 +720,7 @@
   )
 
 (load (expand-file-name "gnus.el" user-emacs-directory))
+(load (expand-file-name "chezmoi.el" user-emacs-directory))
 
 ;; Conditionally Load OCaml files
 (add-to-list 'auto-mode-alist '("\.\(ml\|mli\)\\'" .  (lambda ()
