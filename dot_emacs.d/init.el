@@ -71,13 +71,16 @@
   (auto-save-timeout 300             "number of seconds idle time before auto-save (default: 30)")
   (auto-save-interval 200            "number of keystrokes between auto-saves (default: 300))" )
   (vc-make-version-backup t          "Make backup even if under version control")
-  (custom-file "~/.emacs.d/emacs-custom.el" "Where all set-custom variables are stored")
+
+  (custom-file (expand-file-name "emacs-custom.el" user-emacs-directory)
+                                     "Where all set-custom variables are stored")
   :config
   (if (file-exists-p custom-file)
       (load custom-file)
     (with-temp-buffer (write-file custom-file)))
 
-  (let ((backup-directory "~/.emacs.d/emacs-backups/"))
+  (let ((backup-directory (file-name-as-directory
+                           (expand-file-name "emacs-backups" user-emacs-directory))))
     (if (not (file-exists-p backup-directory))
         (make-directory backup-directory))
     (setq backup-directory-alist
@@ -121,8 +124,8 @@
   (tool-bar-mode -1)
   (global-auto-revert-mode)
   (global-display-line-numbers-mode)
-  (load "~/.emacs.d/extra-emacs-functions.el")
-  (load "~/.emacs.d/fontsetup.el")
+  (load (expand-file-name "extra-emacs-functions.el" user-emacs-directory ))
+  (load (expand-file-name "fontsetup.el" user-emacs-directory ))
   )
 
 (use-package dashboard
@@ -392,11 +395,14 @@
   (setq langtool-default-language "en-US")
   )
 
+(defvar snippets-dir (file-name-as-directory
+                      (expand-file-name "snippets" user-emacs-directory)))
+
 (use-package yasnippet
   :hook ((prog-mode . yas-minor-mode)
          (org-mode . yas-minor-mode))
   :custom
-  (yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (yas-snippet-dirs '(snippets-dir))
   )
 
 (use-package yasnippet-snippets
@@ -468,7 +474,7 @@
 (use-package magit
   :config
   (set-face-foreground 'magit-branch-current "green")
-  (load "~/.emacs.d/gerrit-utils.el")
+  (load (expand-file-name "gerrit-utils.el" user-emacs-directory))
   :bind (("C-x g" . magit-status)
          ("C-x M-g" . magit-dispatch-popup)
          (:map magit-mode-map
@@ -707,7 +713,7 @@
 (use-package ibuffer-vc
   )
 
-(load "~/.emacs.d/gnus.el")
+(load (expand-file-name "gnus.el" user-emacs-directory))
 
 ;; Conditionally Load OCaml files
 (add-to-list 'auto-mode-alist '("\.\(ml\|mli\)\\'" .  (lambda ()
