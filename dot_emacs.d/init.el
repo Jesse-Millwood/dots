@@ -566,6 +566,7 @@
          ;;	 (org-finalize-agenda . place-agenda-tags)
          )
   :custom
+  (org-duration-format 'h:mm)
   (org-export-latex-listings t)
   (org-image-actual-width nil)
   (org-agenda-sticky t)
