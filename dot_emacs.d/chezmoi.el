@@ -57,9 +57,7 @@
 Note: Does not run =chezmoi merge=."
   (interactive)
   (let* ((managed-files (split-string (shell-command-to-string "chezmoi managed") "\n"))
-         (changed-files (remove-if-not #'chezmoi|changed-p
-                                       (remove-if #'file-directory-p  managed-files)))
-         (selected-file (completing-read "Select a dotfile to merge:" changed-files))
+         (selected-file (completing-read "Select a dotfile to merge:" managed-files))
          (source-file (shell-command-to-string-no-line (concat "chezmoi source-path " selected-file))))
     (ediff-files selected-file source-file)))
 
