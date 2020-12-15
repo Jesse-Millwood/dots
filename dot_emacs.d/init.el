@@ -119,6 +119,7 @@
   (word-wrap t)
   :config
   (winner-mode)
+  (global-display-fill-column-indicator-mode)
   (global-hl-line-mode 1)
   (set-face-attribute hl-line-face nil :background "#254175")
   (tool-bar-mode -1)
@@ -131,6 +132,8 @@
 (use-package dashboard
   :ensure t
   :demand t
+  :hook
+  (dashboard-mode . (lambda () (display-fill-column-indicator-mode 0)))
   :custom
   (dashboard-center-content t)
   (dashboard-startup-banner 'logo)
