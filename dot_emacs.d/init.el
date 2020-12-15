@@ -101,7 +101,7 @@
   :demand
   :hook
   (
-   (text-mode . (lambda () (set-fill-column 100)))
+   (text-mode . (lambda () (set-fill-column 80)))
    (focus-in . set-font-preference)
    )
   :bind
@@ -359,7 +359,7 @@
 (use-package auctex
   :hook
   (
-   (LaTeX-mode . (lambda () (set-fill-column 100)))
+   (LaTeX-mode . (lambda () (set-fill-column 80)))
    (LaTeX-mode . LaTeX-math-mode)
    (LaTeX-mode . turn-on-reftex)
    (LaTeX-mode . turn-on-auto-fill)
