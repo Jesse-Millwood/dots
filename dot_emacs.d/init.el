@@ -483,6 +483,10 @@
          (:map magit-mode-map
                ("q". (lambda() (interactive (magit-mode-bury-buffer t)))))))
 
+(use-package diff-hl
+  :config
+  (global-diff-hl-mode))
+
 (use-package flycheck
   :config (global-flycheck-mode))
 
