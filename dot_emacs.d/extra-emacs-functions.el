@@ -100,5 +100,14 @@
     )
   )
 
+(defun jcm-insert-uline-to-fc ()
+  "Insert an underline to the fill collumn"
+  (interactive)
+  ;; Excursion not saved because it is easier to be put at the end
+  ;; and not have to worry about accidentally moving the underline
+  ;; to the next line
+  (insert-char ?_ (- fill-column (current-column)))
+  )
+
 (provide 'extra-emacs-functions)
 ;;; extra-emacs-functions.el ends here
