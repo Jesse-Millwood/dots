@@ -288,7 +288,9 @@
          ("C-S-k" . windmove-down)))
 
 (use-package ace-window
-  :bind (("M-o" . ace-window))
+  :bind (("C-x a w" . ace-window)
+         ("C-x a s" . ace-swap-window)
+         ("C-x a d" . ace-delete-window))
   )
 
 (use-package winum
