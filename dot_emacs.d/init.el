@@ -596,6 +596,11 @@
   (org-refile-use-outline-path 'file)
   (org-refile-targets '((org-agenda-files :maxlevel . 3)))
   :config
+   (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((org . t)
+      (calc . t)))
+
 ;;  (org-babel-do-load-languages
 ;;   'org-babel-load-languages
 ;;   '((org . t)
