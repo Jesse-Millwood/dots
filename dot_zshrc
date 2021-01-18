@@ -13,6 +13,7 @@ plugins=(
     colored-man-pages
     rsync
     themes
+    flatpak
 )
 
 source $ZSH/oh-my-zsh.sh
