@@ -19,11 +19,15 @@
                     (abbreviate-file-name (buffer-file-name))))
         (project-root (cdr (project-current)))
         (project-root-dir
+
+         (if (project-current)
          (file-name-nondirectory
           (directory-file-name
-           (file-name-directory (cdr (project-current)))))))
+               (file-name-directory (cdr (project-current)))))
+           nil)
+         ))
 
-    (when filename
+    (when (and filename relative-to-root-p)
       (message "Relative Path: %s" (file-relative-name filename project-root))
       (message "With project prefix: %s"
                (file-name-nondirectory
