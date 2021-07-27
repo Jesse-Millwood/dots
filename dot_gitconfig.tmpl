@@ -5,6 +5,8 @@
         {{- else if eq .chezmoi.hostname "boxtoo" }}
         email = jesse_dev@fastmail.com
         {{- end }}
+[includeIf "gitdir:~/woollylabs/code/**"]
+        path = ~/woollylabs/configs/gitconfig
 [color]
         ui = auto
 [difftool]
