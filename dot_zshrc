@@ -54,9 +54,12 @@ if [ -d $HOME/.local/bin ]; then
     export PATH=$PATH:$HOME/.local/bin
 fi
 
+if [ -d $HOME/.local/share/applications ]; then
+    export XDG_DATA_DIRS=$HOME/.local/share/applications:${XDG_DATA_DIRS}
+fi
+
 # Personal functions _______________________________________
 alias kill-emacsclient="emacsclient -e '(save-buffers-kill-emacs)'"
-
 
 # DW Support _______________________________________________
 function get_gerrithooks()
