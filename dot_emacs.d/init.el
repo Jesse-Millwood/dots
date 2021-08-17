@@ -209,6 +209,12 @@
   (load-theme 'doom-gruvbox t)
   )
 
+(defun enable-doom-modeline-icons (_frame)
+  (when (display-graphic-p _frame)
+    (setq doom-modeline-icon t)
+    (setq doom-modeline-major-mode-icon t)
+  ))
+
 (use-package doom-modeline
   :hook (after-init . doom-modeline-init)
   :custom
@@ -217,8 +223,7 @@
   (x-underline-at-descent-line nil)
   :config
   (column-number-mode)
-  (setq doom-modeline-icon (display-graphic-p))
-  (setq doom-modeline-major-mode-icon (display-graphic-p))
+  (add-hook 'after-make-frame-functions #'enable-doom-modeline-icons)
   )
 
 ;; UI Packages
@@ -239,6 +244,12 @@
   :config
   (all-the-icons-ivy-setup))
 
+(defun enable-centaur-icons (_frame)
+    (when (display-graphic-p _frame)
+      (setq centaur-tabs-set-icons t)
+    )
+)
+
 (use-package centaur-tabs
   :demand
   :custom
@@ -248,8 +259,9 @@
   (centaur-tabs-modified-marker "●")
   (centaur-tabs-group-by-projectile-project)
   (centaur-tabs-enable-key-bindings t)
-  :config
   (centaur-tabs-mode t)
+  :config
+  (add-hook 'after-make-frame-functions #'enable-centaur-icons)
   (setq centaur-tabs-set-icons (display-graphic-p))
   )
 
