@@ -114,7 +114,7 @@
                                       "concurrenc" "trust" "flow" "information" "dift"
                                       "survey" "battery" "risc-v" "concurren" "verification"
                                       "validation" "proof" "capabilitiy" "sel4" "schedul" "memory"
-                                      "kernel" "ocaml"))
+                                      "kernel" "ocaml" "cap"))
 (setq arxiv-interesting-keywords (append arxiv-cs-interesting-keywords
                                          arxiv-ee-interesting-keywords))
 (defface arxiv-interesting-face
