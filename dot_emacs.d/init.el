@@ -159,8 +159,8 @@
   :if (< (length command-line-args) 2)
   :config (dashboard-setup-startup-hook)
 
-;;  :config
-;;  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+  :config
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   )
 
 (use-package ediff
