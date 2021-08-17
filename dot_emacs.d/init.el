@@ -123,6 +123,12 @@
   (load (expand-file-name "fontsetup.el" user-emacs-directory ))
   )
 
+(use-package exec-path-from-shell
+  :config
+  (when (daemonp)
+    (exec-path-from-shell-initialize))
+    )
+
 (use-package dashboard
   :ensure t
   :demand t
