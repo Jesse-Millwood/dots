@@ -495,8 +495,13 @@
 
 ;; Magit-mode-bury-buffer passed true kills the buffer
 ;; - gotten from: https://emacs.stackexchange.com/questions/35775/how-to-kill-magit-diffs-buffers-on-quit
+;;  :hook
+;;   (magit-pre-refresh . diff-hl-magit-pre-refresh)
+;;   (magit-post-refresh . diff-hl-magit-post-refresh)
 (use-package magit
   :config
+  ;; (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+  ;; (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   (set-face-foreground 'magit-branch-current "green")
   (load (expand-file-name "gerrit-utils.el" user-emacs-directory))
   :bind (("C-x g" . magit-status)
