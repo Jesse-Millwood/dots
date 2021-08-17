@@ -218,6 +218,9 @@
 (use-package doom-modeline
   :hook (after-init . doom-modeline-init)
   :custom
+  (doom-modeline-height 30)
+  (x-underline-at-descent-line nil)
+  (doom-modeline-project-detection 'projectile)
   (doom-modeline-buffer-file-name-stle 'truncate-upto-project)
   (doom-modeline-height 30)
   (x-underline-at-descent-line nil)
