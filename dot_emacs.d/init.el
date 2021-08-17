@@ -760,6 +760,10 @@
 (use-package ibuffer-vc
   )
 
+(use-package diredfl
+  :hook ((dired-mode . diredfl-mode))
+  )
+
 (load (expand-file-name "gnus.el" user-emacs-directory))
 (load (expand-file-name "chezmoi.el" user-emacs-directory))
 
