@@ -18,9 +18,6 @@
 ;;; Code:
 ;; Package Handling ______________________________________________________________________
 
-;; Set GC threshold high for initializing, reduce later
-(setq gc-cons-threshold (* 50 1000 1000))
-
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
@@ -748,3 +745,10 @@
 
 (provide 'init)
 ;;; init.el ends here
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+(message "*** Emacs loaded in %s with %d garbage collections."
+     (format "%.2f seconds"
+             (float-time
+              (time-subtract after-init-time before-init-time))) gcs-done)
