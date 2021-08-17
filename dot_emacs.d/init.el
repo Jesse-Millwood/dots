@@ -729,6 +729,7 @@
 (use-package python-mode
   :ensure nil
   :custom
+  (python-shell-interpreter "python3")
   (python-indent-offset 4)
   )
 
