@@ -489,6 +489,10 @@
   (counsel-projectile-switch-project-action 'counsel-projectile-switch-project-action-dired)
   )
 
+(use-package diff-hl
+  :config
+  (global-diff-hl-mode))
+
 ;; Magit-mode-bury-buffer passed true kills the buffer
 ;; - gotten from: https://emacs.stackexchange.com/questions/35775/how-to-kill-magit-diffs-buffers-on-quit
 (use-package magit
@@ -500,9 +504,10 @@
          (:map magit-mode-map
                ("q". (lambda() (interactive (magit-mode-bury-buffer t)))))))
 
-(use-package diff-hl
-  :config
-  (global-diff-hl-mode))
+(use-package transient
+  :custom
+  (transient-enable-popup-navigation 't)
+  )
 
 (use-package flycheck
   :config (global-flycheck-mode))
