@@ -588,7 +588,7 @@
   )
 
 ;; Programming Languages Packages
-
+(use-package gnuplot)
 (use-package org
   :defer t
   :bind (("C-c l" . org-store-link)
@@ -624,7 +624,8 @@
    (org-babel-do-load-languages
     'org-babel-load-languages
     '((org . t)
-      (calc . t)))
+      (calc . t)
+      (gnuplot . t)))
 
 ;;  (org-babel-do-load-languages
 ;;   'org-babel-load-languages
