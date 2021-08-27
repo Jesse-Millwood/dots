@@ -96,7 +96,9 @@
   :hook
   (
    (text-mode . (lambda () (set-fill-column 80)))
-   (focus-in . set-font-preference)
+   ;;   (focus-in . set-font-preference)
+;;   (after-make-frame . set-font-preference)
+   (server-after-make-frame . set-font-preference)
    )
   :bind
   (:map global-map
