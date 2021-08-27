@@ -598,6 +598,7 @@
   :hook (
          (org-mode . company-mode)
          ;;	 (org-finalize-agenda . place-agenda-tags)
+         (org-babel-after-execute . org-redisplay-inline-images)
          )
   :custom
   (org-duration-format 'h:mm)
