@@ -731,8 +731,8 @@
 (use-package python-mode
   :ensure nil
   :custom
-  (python-shell-interpreter "python3")
   (python-indent-offset 4)
+  (python-shell-interpreter "python3")
   )
 
 (use-package csharp-mode
