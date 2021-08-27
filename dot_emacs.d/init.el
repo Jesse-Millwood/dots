@@ -223,6 +223,7 @@
   (doom-modeline-buffer-file-name-stle 'truncate-upto-project)
   (doom-modeline-height 30)
   (x-underline-at-descent-line nil)
+  (doom-modeline-project-detection 'projectile)
   :config
   (column-number-mode)
   (add-hook 'after-make-frame-functions #'enable-doom-modeline-icons)
