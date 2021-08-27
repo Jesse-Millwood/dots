@@ -766,6 +766,12 @@
   :hook ((dired-mode . diredfl-mode))
   )
 
+(use-package tree-sitter-langs)
+(use-package tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode))
+
 (load (expand-file-name "gnus.el" user-emacs-directory))
 (load (expand-file-name "chezmoi.el" user-emacs-directory))
 
