@@ -103,6 +103,7 @@
           ("https://element.io/blog/rss/" Projects)
           ("https://matrix.org/blog/feed" Programming)
           ("https://interrupt.memfault.com/feed.xml" Programming)
+          ("https://blog.althea.net/rss" Projects)
           ))
   )
 
