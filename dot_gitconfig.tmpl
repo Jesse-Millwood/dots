@@ -1,8 +1,6 @@
 [user]
         name = Jesse Millwood
-        {{- if eq .chezmoi.hostname "dwbuntu" }}
-        email = jesse.millwood@dornerworks.com
-        {{- else if eq .chezmoi.hostname "boxtoo" }}
+        {{- if eq .chezmoi.hostname "lemur" }}
         email = jesse_dev@fastmail.com
         {{- end }}
 [includeIf "gitdir:~/woollylabs/code/**"]
@@ -15,9 +13,7 @@
         tool = meld
         guitool = meld
 [credential]
-        {{- if eq .chezmoi.hostname "dwbuntu" }}
-        helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
-        {{- else if eq .chezmoi.hostname "boxtoo" }}
+        {{- if eq .chezmoi.hostname "lemur" }}
         helper = libsecret
         {{- end }}
 [merge]
@@ -27,18 +23,9 @@
            cmd = emacs \"\" --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
 [alias]
         lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-[review "http://gerritcodereview:8080/"]
-        username = jesse
+
 [core]
         editor = emacs -nw
-
-{{- if eq .chezmoi.hostname "dwbuntu" }}
-[http]
-	sslVerify = true
-[http "https://gitlab.dornerworks.com/"]
-	sslCAInfo = /home/jesse/.local/etc/ssl/certs/git-dw.pem
-
-{{- end }}
 
 # Local Variables:
 # mode: conf
