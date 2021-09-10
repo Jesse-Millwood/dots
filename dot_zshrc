@@ -23,8 +23,8 @@ promptinit
 
 unsetopt sharehistory
 
-export EDITOR="emacs -nw"
-export VISUAL="emacs"
+export EDITOR="emacsclient -a '' -t -s Default "
+export VISUAL="emacsclient -a '' -c -s Default "
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
@@ -58,8 +58,30 @@ if [ -d $HOME/.local/share/applications ]; then
     export XDG_DATA_DIRS=$HOME/.local/share/applications:${XDG_DATA_DIRS}
 fi
 
-# Personal functions _______________________________________
-alias kill-emacsclient="emacsclient -e '(save-buffers-kill-emacs)'"
+# Personal aliases and functions ___________________________
+function kill-emacsclient (){
+    emacsclient -s Default -e '(save-buffers-kill-emacs)'
+}
+
+function kill-emacsclient-server (){
+    emacsclient -s $1 -e '(save-buffers-kill-emacs)'
+}
+
+function ec () {
+    emacsclient -a '' -c -s Default $1 &
+}
+function ect () {
+    emacsclient -a '' -t -s Default $1
+}
+
+function ecs () {
+    emacsclient -a '' -c -s $1 $2 &
+}
+function ects () {
+    emacsclient -a '' -t -s $1 $2
+}
+
+
 
 # OCAML Support ____________________________________________
 eval $(opam env)
