@@ -81,7 +81,9 @@ function ects () {
     emacsclient -a '' -t -s $1 $2
 }
 
-
+function make-c-etags-table () {
+    find . -name "*.[chCH]" -print | etags -
+}
 
 # OCAML Support ____________________________________________
 if opam -v &> /dev/null; then
