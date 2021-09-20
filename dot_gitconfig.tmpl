@@ -2,6 +2,8 @@
         name = Jesse Millwood
         {{- if eq .chezmoi.hostname "lemur" }}
         email = jesse_dev@fastmail.com
+        {{- else if eq .chezmoi.hostname "pop-os" }}
+        email = jmillwood@masten.aero
         {{- end }}
 [includeIf "gitdir:~/woollylabs/code/**"]
         path = ~/woollylabs/configs/gitconfig
