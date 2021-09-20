@@ -84,7 +84,9 @@ function ects () {
 
 
 # OCAML Support ____________________________________________
-eval $(opam env)
+if opam -v &> /dev/null; then
+    eval $(opam env)
+fi
 
 
 # Local Variables:
