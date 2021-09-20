@@ -5,8 +5,10 @@
         {{- else if eq .chezmoi.hostname "pop-os" }}
         email = jmillwood@masten.aero
         {{- end }}
+{{- if eq .chezmoi.hostname "lemur" }}
 [includeIf "gitdir:~/woollylabs/code/**"]
         path = ~/woollylabs/configs/gitconfig
+{{- end }}
 [color]
         ui = auto
 [difftool]
