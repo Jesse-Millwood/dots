@@ -19,6 +19,8 @@
 [credential]
         {{- if eq .chezmoi.hostname "lemur" }}
         helper = libsecret
+        {{- else if eq .chezmoi.hostname "pop-os" }}
+        helper = libsecret
         {{- end }}
 [merge]
         tool = ediff
