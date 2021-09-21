@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Org Note Heading
+# key: nh
+# --
+#+title: ${1:Title}
+#+startup: showall indent
+#+options: toc:nil
+
+$0
