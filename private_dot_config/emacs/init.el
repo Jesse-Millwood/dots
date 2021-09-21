@@ -296,16 +296,19 @@
       )
   )
 
-(use-package windmove
-  :bind (("C-S-j" . windmove-left)
-         ("C-S-l" . windmove-right)
-         ("C-S-i" . windmove-up)
-         ("C-S-k" . windmove-down)))
+;;(use-package windmove
+;;  :bind (("C-S-j" . windmove-left)
+;;         ("C-S-l" . windmove-right)
+;;;;         ("H-S-i" . windmove-up)
+;;         ("C-S-k" . windmove-down))
+;;  :config
+;;  (global-set-key) )
 
 (use-package ace-window
-  :bind (("C-x a w" . ace-window)
-         ("C-x a s" . ace-swap-window)
-         ("C-x a d" . ace-delete-window))
+  :custom
+  (aw-dispatch-always t)
+  :bind
+  (("M-o" . ace-window))
   )
 
 (use-package winum
