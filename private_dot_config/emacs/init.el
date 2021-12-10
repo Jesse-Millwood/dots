@@ -426,6 +426,8 @@
          (org-mode . yas-minor-mode))
   :custom
   (yas-snippet-dirs '(snippets-dir))
+  :config
+  (yas-reload-all)
   )
 
 (use-package yasnippet-snippets
@@ -462,23 +464,30 @@
 
 ;; General Project/tools
 
+(defun projectile-vc-root-dir (dir)
+  "Retrieve the root directory of the project at DIR using `vc-root-dir'."
+  (let ((default-directory dir))
+    (vc-root-dir)))
+
 (use-package projectile
   :hook (prog-mode . projectile-mode)
   :custom
   (projectile-enable-caching t)
   (projectile-completion-system 'ivy)
-  (projectile-switch-project-action 'projectile-dired)
+  (projectile-require-project-root t)
+  (projectile-switch-project-action 'projectile-vc)
   ;; Built universal ctags from https://github.com/universal-ctags/ctags
   ;;  ./autogen.sh
   ;;  ./configure --program-prefix=universal-
   ;;  make
   ;;  sudo make install
-  (projectile-tags-command "universal-ctags -Re -f \"%s\" %s \"%s\"")
+  ;; (projectile-tags-command "ctags -Re -f \"%s\" %s \"%s\"")
   ;; A list of functions for finding project roots
-  (projectile-project-root-files-functions '(projectile-root-top-down
-                                             projectile-root-local
-                                             projectile-root-bottom-up
-                                             projectile-root-top-down-recurring))
+  (projectile-project-root-functions '(projectile-vc-root-dir
+                                       projectile-root-top-down
+                                       ;; projectile-root-local
+                                       projectile-root-bottom-up
+                                       projectile-root-top-down-recurring))
   :config
   (counsel-projectile-mode)
   :bind
@@ -594,6 +603,7 @@
 (use-package gnuplot)
 (use-package org
   :defer t
+;;  :ensure org-plus-contrib
   :bind (("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
          ("C-c !" . org-time-stamp-inactive)
@@ -614,8 +624,8 @@
   (org-ditaa-jar-path "/usr/bin/ditaa")
   (org-plantuml-jar-path "/opt/plantuml.jar")
   ;; Also made it so that the todo state changes are not tracked anymore
-  (org-todo-keywords '((sequence "☛ TODO(t)" "Started(s!)" "☀ Current(c!)" "|" "✔ DONE(d!)")
-                       (sequence "⚑ WAITING(w!/!)" "|")
+  (org-todo-keywords '((sequence "☛ TODO(t)" "Started(s)" "☀ Current(c)" "|" "✔ DONE(d)")
+                       (sequence "⚑ WAITING(w)" "|")
                        (sequence "|" "✘ CANCELED(x)")))
   (org-default-notes-file "~/Notes/Notes.org")
   (org-default-agenda-file "~/Notes/Agenda/Default.org")
@@ -625,19 +635,15 @@
   (org-refile-use-outline-path 'file)
   (org-refile-targets '((org-agenda-files :maxlevel . 3)))
   :config
+;;  (require 'ox-confluence)
+;;  (require 'ol-man)
    (org-babel-do-load-languages
     'org-babel-load-languages
     '((org . t)
       (calc . t)
-      (gnuplot . t)))
+      (gnuplot . t)
+      (python . t)))
 
-;;  (org-babel-do-load-languages
-;;   'org-babel-load-languages
-;;   '((org . t)
-;;     (ditaa . t)
-;;     (python . t)
-;;     (plantuml . t)
-  ;;     (dot . t)))
   (defvar org-capture-templates
     '(
       ("t" "todo" entry (file+headline org-default-notes-file "Tasks")
@@ -728,9 +734,6 @@
 (use-package lsp-ui
   :commands lsp-ui-mode)
 
-(use-package company-lsp
-  :commands company-lsp)
-
 (use-package python-mode
   :ensure nil
   :custom
@@ -739,7 +742,8 @@
   )
 
 (use-package csharp-mode
-  :ensure nil
+    :config
+    (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode))
   )
 
 (use-package vterm
@@ -775,8 +779,18 @@
   (require 'tree-sitter-langs)
   (global-tree-sitter-mode))
 
-(load (expand-file-name "gnus.el" user-emacs-directory))
+(use-package meson-mode
+  :mode "\\meson.build\\'"
+  )
+
+(use-package kconfig-mode
+  :mode "\\Kconfig\\'")
+
+(use-package git-modes)
+
+;; (load (expand-file-name "gnus.el" user-emacs-directory))
 (load (expand-file-name "chezmoi.el" user-emacs-directory))
+(load (expand-file-name "newsticker-config.el" user-emacs-directory))
 
 ;; Conditionally Load OCaml files
 (add-to-list 'auto-mode-alist '("\.\(ml\|mli\)\\'" .  (lambda ()
@@ -785,6 +799,15 @@
                                                     (load "~/.emacs.d/ocaml-setup.el")
                                                     (tuareg-mode))
                                                 ))))
+
+;; Machine Specific files
+(if (string-equal system-name "masten")
+    (load (expand-file-name "masten.el" user-emacs-directory)))
+
+(use-package calc
+  :hook (calc-mode . (lambda ()
+                         (load (expand-file-name "calc-prog.el" user-emacs-directory))))
+  )
 
 
 ;; Reduce gc threshold

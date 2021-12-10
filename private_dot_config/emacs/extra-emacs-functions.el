@@ -91,7 +91,8 @@
   (setq org-agenda-tags-column (- 4 (window-width)))
   (org-agenda-align-tags))
 
-(setq rss-config-path "~/.emacs.d/rss-config.el")
+
+(setq rss-config-path (concat user-emacs-directory "rss-config.el"))
 (defun jcm-start-elfeed ()
   "Start and load Elfeed."
   (interactive)
