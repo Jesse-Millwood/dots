@@ -50,7 +50,7 @@
                 (let* ((line-end index)
                        (line-beg (line-beginning-position))
                        (line (buffer-substring-no-properties line-beg line-end))
-                       (file-name (substring line 5)))
+                       (file-name (concat "~" (substring line 5))))
                   (add-to-list 'files file-name)
                   ))))))
       files)))
