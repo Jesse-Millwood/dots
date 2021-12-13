@@ -32,11 +32,6 @@ unsetopt sharehistory
 
 export EDITOR="emacsclient -a '' -t -s Default "
 export VISUAL="emacsclient -a '' -c -s Default "
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 
 # Packages outside of oh-my-zsh installed to /usr/local/share/zsh/site-functions
 export ZSH_SITEFUNCTIONS_DIR=/usr/local/share/zsh/site-functions
