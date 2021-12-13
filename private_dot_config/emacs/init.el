@@ -788,9 +788,10 @@
 
 (use-package git-modes)
 
-;; (load (expand-file-name "gnus.el" user-emacs-directory))
-(load (expand-file-name "chezmoi.el" user-emacs-directory))
-(load (expand-file-name "newsticker-config.el" user-emacs-directory))
+(use-package calc
+  :hook (calc-mode . (lambda ()
+                       (load (expand-file-name "calc-prog.el" user-emacs-directory))))
+  )
 
 ;; Conditionally Load OCaml files
 (add-to-list 'auto-mode-alist '("\.\(ml\|mli\)\\'" .  (lambda ()
@@ -804,11 +805,12 @@
 (if (string-equal system-name "masten")
     (load (expand-file-name "masten.el" user-emacs-directory)))
 
-(use-package calc
-  :hook (calc-mode . (lambda ()
-                         (load (expand-file-name "calc-prog.el" user-emacs-directory))))
-  )
-
+(setq extra-files '("chezmoi.el" "newsticker-config.el"))
+(dolist (extra-file extra-files)
+  (let ((file-name (expand-file-name extra-file user-emacs-directory)))
+    (if (file-exists-p file-name)
+        (load file-name))
+  ))
 
 ;; Reduce gc threshold
 (setq gc-cons-threshold (* 2 1000 1000))
