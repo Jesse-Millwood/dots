@@ -60,6 +60,11 @@ if [ -d $HOME/.local/share/applications ]; then
     export XDG_DATA_DIRS=$HOME/.local/share/applications:${XDG_DATA_DIRS}
 fi
 
+# Conditional Enviornment Variables ________________________
+if [ -d $HOME/.config/ripgrep ]; then
+    export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
+fi
+
 # Personal aliases and functions ___________________________
 function kill-emacsclient (){
     emacsclient -s Default -e '(save-buffers-kill-emacs)'
