@@ -17,8 +17,11 @@ plugins=(
     colored-man-pages
     rsync
     themes
-    flatpak
 )
+
+if check_for_plugin flatpak; then
+    plugins+=( flatpak )
+fi
 
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit promptinit
