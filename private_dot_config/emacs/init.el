@@ -685,6 +685,9 @@
   (cmake-tab-width 4)
   )
 
+(use-package eldoc-cmake
+  :hook (cmake-mode . eldoc-cmake-enable))
+
 (use-package cc-mode
    :config
    (add-hook 'c-mode-common-hook
@@ -727,6 +730,8 @@
 (use-package json-mode
   :mode "\\.json\\'"
   )
+
+(use-package yaml-mode)
 
 (use-package lsp-mode
   :hook (python-mode rust-mode ocaml-mode)
