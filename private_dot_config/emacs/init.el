@@ -131,7 +131,6 @@
     )
 
 (use-package dashboard
-  :ensure t
   :demand t
   :hook
   (dashboard-mode . (lambda () (display-fill-column-indicator-mode 0)))
@@ -143,8 +142,10 @@
   (dashboard-set-init-info t)
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-items '((recents . 5)
+  (setq dashboard-items '((bookmarks . 5)
+                          (recents . 5)
                           (projects . 5)
+                          (agenda . 5)
                           )))
 
 (use-package frame
