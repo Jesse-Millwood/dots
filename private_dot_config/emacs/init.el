@@ -807,6 +807,19 @@
                        (load (expand-file-name "calc-prog.el" user-emacs-directory))))
   )
 
+(use-package pdf-tools
+  :pin manual
+  :custom
+  (pdf-view-display-size 'fit-page)
+  (pdf-annot-activate-created-annotations t)
+  :bind (:map pdf-view-mode-map  ("C-s" . isearch-forward)
+         ("h" . pdf-annot-add-highlight-markup-annotation)
+         ("t" . pdf-annot-add-text-annotation)
+         ("D" . pdf-annot-delete))
+
+  :config
+  (pdf-tools-install))
+
 ;; Conditionally Load OCaml files
 (add-to-list 'auto-mode-alist '("\.\(ml\|mli\)\\'" .  (lambda ()
                                               (if (file-exists-p "~/.opam")
