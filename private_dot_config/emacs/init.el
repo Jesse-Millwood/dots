@@ -21,9 +21,8 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-;; Org-mode specific repo
 (add-to-list 'package-archives
-             '("org" . "https://orgmode.org/elpa/") t)
+               '("elpa" .  "https://elpa.gnu.org/packages/" ) t)
 (package-initialize)
 
 (unless (package-installed-p 'benchmark-init)
@@ -602,8 +601,9 @@
 ;; Programming Languages Packages
 (use-package gnuplot)
 (use-package org
+  :pin elpa
   :defer t
-;;  :ensure org-plus-contrib
+;;  :ensure org-contrib
   :bind (("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
          ("C-c !" . org-time-stamp-inactive)
