@@ -356,7 +356,7 @@
 
 (use-package whitespace-mode
   :ensure nil
-  :hook (prog-mode LaTeX-mode markdown-mode)
+  :hook (prog-mode LaTeX-mode markdown-mode conf-mode)
   :custom
   (whitespace-line-column 100)
   :config
@@ -615,6 +615,7 @@
          (org-babel-after-execute . org-redisplay-inline-images)
          )
   :custom
+  (org-hide-emphasis-markers t)
   (org-duration-format 'h:mm)
   (org-export-latex-listings t)
   (org-image-actual-width nil)
