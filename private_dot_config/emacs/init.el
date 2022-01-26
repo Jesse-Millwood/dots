@@ -734,8 +734,15 @@
 (use-package yaml-mode)
 
 (use-package lsp-mode
-  :hook (python-mode rust-mode ocaml-mode)
+  :hook ((python-mode . lsp)
+         (rust-mode . lsp)
+         (ocaml-mode . lsp)
+         (c-mode . lsp)
+         (c++-mode . lsp))
   :commands lsp
+  :bind ("C-c l" . transient-lsp-dispatch)
+  :config
+  (load (expand-file-name "transient-lsp.el" user-emacs-directory))
   )
 
 (use-package lsp-ui
