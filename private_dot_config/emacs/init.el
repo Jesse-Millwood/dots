@@ -677,6 +677,10 @@
           (alltodo "")))))
   )
 
+(use-package org-appear
+  :after org
+  :hook (org-mode . org-appear-mode))
+
 (use-package htmlize
   :defer t
   )
