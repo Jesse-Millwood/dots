@@ -737,8 +737,22 @@
 
 (use-package rust-mode
   :mode "\\.rs\\'"
-  :init (add-hook 'rust-mode-hook 'lsp)
+  :init
+  (if (not (string-match-p (regexp-quote "nightly") (shell-command-to-string "rustc --version")))
+      (add-hook 'rust-mode-hook 'lsp))
   )
+
+;;(defun disable-lsp-for-current-mode ()
+;;  (interactive)
+  ;; [x] Get current mode
+  ;; Get hook for current mode
+;;  (let ((current-mode (with-current-buffer (current-buffer) major-mode))
+;;        )
+    ;; [x] remove lsp from list
+;;    (setq themode-hook (remove 'lsp (intern (format "%s-hook" current-mode))))
+    ;; kill lsp, needs a workspace argument
+    ;; (lsp-workspace-shutdown)
+;;    ))
 
 (use-package cargo
   :disabled
