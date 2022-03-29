@@ -798,6 +798,17 @@
   (python-shell-interpreter "python3")
   )
 
+(use-package pyvenv
+  :custom
+  (pdb-command-name "python3 -m pdb")
+  :init
+  (let ((pyenv-global-dir "~/.pyenv/versions"))
+    (if (not (file-directory-p pyenv-global-dir))
+        (make-directory pyenv-global-dir t))
+    (setenv "WORKON_HOME" pyenv-global-dir)
+    )
+)
+
 (use-package csharp-mode
     :config
     (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode))
