@@ -384,7 +384,9 @@
                                newline-mark))
   )
 
+
 (use-package rg
+  ;; Use "C-c s" for rg-menu to customize the search
   :ensure-system-package (rg . ripgrep)
   :demand
   )
@@ -513,8 +515,9 @@
   )
 
 (use-package diff-hl
-  :config
-  (global-diff-hl-mode))
+  :hook ((prog-mode . diff-hl-margin-mode)
+         (dired-mode . diff-hl-dired-mode))
+  )
 
 ;; Magit-mode-bury-buffer passed true kills the buffer
 ;; - gotten from: https://emacs.stackexchange.com/questions/35775/how-to-kill-magit-diffs-buffers-on-quit
@@ -650,9 +653,11 @@
   :config
 ;;  (require 'ox-confluence)
 ;;  (require 'ol-man)
+  (add-to-list 'org-log-note-headings '(state . "State %-12s from %-12S %d"))
    (org-babel-do-load-languages
     'org-babel-load-languages
     '((org . t)
+      (ditaa . t)
       (calc . t)
       (gnuplot . t)
       (python . t)))
