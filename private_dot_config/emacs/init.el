@@ -767,12 +767,21 @@
 
 (use-package yaml-mode)
 
+(use-package ada-ref-man
+  :pin elpa
+  )
+
+(use-package ada-mode
+  :pin elpa
+  )
+
 (use-package lsp-mode
   :hook ((python-mode . lsp)
          (rust-mode . lsp)
          (ocaml-mode . lsp)
          (c-mode . lsp)
-         (c++-mode . lsp))
+         (c++-mode . lsp)
+         (ada-mode . lsp))
   :commands lsp
   :bind ("C-c l" . transient-lsp-dispatch)
   :config
