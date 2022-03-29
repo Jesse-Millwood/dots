@@ -124,6 +124,16 @@
   (load (expand-file-name "fontsetup.el" user-emacs-directory ))
   )
 
+(use-package auth-source
+  :config
+  (let ((potential-auth-sources '("~/.config/auth/authinfo.gpg"
+                                  "~/.authinfo.gpg")))
+    (dolist (auth-source-file potential-auth-sources)
+      (if (file-exists-p auth-source-file)
+          (add-to-list 'auth-sources auth-source-file))
+      )
+    )
+  )
 (use-package exec-path-from-shell
   :config
   (when (daemonp)
