@@ -854,6 +854,9 @@
 (use-package kconfig-mode
   :mode "\\Kconfig\\'")
 
+(use-package dockerfile-mode
+  :mode "\\Dockerfile\\'")
+
 (use-package git-modes)
 
 (use-package calc
