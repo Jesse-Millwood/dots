@@ -212,6 +212,13 @@
    )
   )
 
+(use-package gdb-mi
+  :custom
+  (gdb-restore-window-configuration-after-quit t)
+  (gdb-many-windows t)
+  (gud-gdb-command-name "gdb -nh -i=mi")
+  )
+
 ;; Visual Packages
 (use-package doom-themes
   :defer nil
