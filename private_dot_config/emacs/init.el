@@ -236,6 +236,7 @@
   (x-underline-at-descent-line nil)
   (doom-modeline-project-detection 'projectile)
   :config
+  (winum-mode)
   (column-number-mode)
   (add-hook 'after-make-frame-functions #'enable-doom-modeline-icons)
   )
