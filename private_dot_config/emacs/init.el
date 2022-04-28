@@ -872,6 +872,7 @@
   )
 
 (use-package pdf-tools
+  ;; Un-pin this when first installing
   :pin manual
   :custom
   (pdf-view-display-size 'fit-page)
