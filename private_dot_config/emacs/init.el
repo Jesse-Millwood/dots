@@ -643,9 +643,6 @@
   (org-todo-keywords '((sequence "☛ TODO(t)" "Started(s)" "☀ Current(c)" "|" "✔ DONE(d)")
                        (sequence "⚑ WAITING(w)" "|")
                        (sequence "|" "✘ CANCELED(x)")))
-  (org-default-notes-file "~/Notes/Notes.org")
-  (org-default-agenda-file "~/Notes/Agenda/Default.org")
-  (org-agenda-files '("~/Notes/Agenda/"))
   (org-outline-path-complete-in-steps nil)
   (org-refile-allow-creating-parent-nodes 'confirm)
   (org-refile-use-outline-path 'file)
@@ -653,6 +650,16 @@
   :config
 ;;  (require 'ox-confluence)
 ;;  (require 'ol-man)
+  (if (file-exists-p "~/Notes/Notes.org")
+      (setq org-default-notes-file "~/Notes/Notes.org")
+    )
+  (if (file-exists-p "~/Notes/Agenda/Default.org")
+      (setq org-default-agenda-file "~/Notes/Agenda/Default.org")
+    )
+  (if (file-exists-p "~/Notes/Agenda/")
+      (setq org-agenda-files '("~/Notes/Agenda/"))
+    )
+
   (add-to-list 'org-log-note-headings '(state . "State %-12s from %-12S %d"))
    (org-babel-do-load-languages
     'org-babel-load-languages
