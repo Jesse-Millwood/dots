@@ -893,7 +893,7 @@
                                                 ))))
 
 ;; Machine Specific files
-(if (string-equal system-name "masten")
+(if (or (string-equal system-name "masten") (string-equal user-login-name "jmillwood"))
     (load (expand-file-name "masten.el" user-emacs-directory)))
 
 (setq extra-files '("chezmoi.el" "newsticker-config.el"))
