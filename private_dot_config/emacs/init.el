@@ -803,6 +803,9 @@
   (load (expand-file-name "transient-lsp.el" user-emacs-directory))
   )
 
+(use-package lsp-treemacs
+  :after lsp-mode)
+
 (use-package lsp-ui
   :commands lsp-ui-mode)
 
