@@ -279,10 +279,10 @@
   (centaur-tabs-set-bar 'over)
   (centaur-tabs-set-modified-marker t)
   (centaur-tabs-modified-marker "●")
-  (centaur-tabs-group-by-projectile-project)
   (centaur-tabs-enable-key-bindings t)
   :config
   (centaur-tabs-mode t)
+  (centaur-tabs-group-by-projectile-project)
   (add-hook 'after-make-frame-functions #'enable-centaur-icons)
   (setq centaur-tabs-set-icons (display-graphic-p))
   )
