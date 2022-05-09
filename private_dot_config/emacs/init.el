@@ -882,6 +882,9 @@
                        (load (expand-file-name "calc-prog.el" user-emacs-directory))))
   )
 
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode))
 (use-package pdf-tools
   ;; Un-pin this when first installing
   :pin manual
