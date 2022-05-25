@@ -885,6 +885,32 @@
 (use-package undo-tree
   :config
   (global-undo-tree-mode))
+
+(use-package csv-mode
+  :custom
+  (csv-field-quotes nil)
+  :config
+  (require 'cl)
+  (require 'color)
+  (defun csv-highlight (&optional separator)
+    (interactive (list (when current-prefix-arg (read-char "Separator: "))))
+    (font-lock-mode 1)
+    (let* ((separator (or separator ?\,))
+           (n (count-matches (string separator) (point-at-bol) (point-at-eol)))
+           (colors (loop for i from 0 to 1.0 by (/ 1.0 n)
+                         collect (apply #'color-rgb-to-hex
+                                        (color-hsl-to-rgb i 0.7 0.5)))))
+      ;;(font-lock-remove-keywords 'csv-mode )
+      (loop for i from 1 to n by 1
+            for c in colors
+            for r = (format "^\\([^%c\n]+%c\\)\\{%d\\}" separator separator i)
+            do (font-lock-add-keywords nil `((,r (1 '(face (:foreground ,c)))))))))
+  ;; provide CSV mode setup
+  (defun my-csv-mode-hook ()
+    (csv-highlight 15))
+  (add-hook 'csv-mode-hook 'my-csv-mode-hook)
+  )
+
 (use-package pdf-tools
   ;; Un-pin this when first installing
   :pin manual
