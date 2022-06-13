@@ -11,10 +11,10 @@ tar -xzf ohmyzsh-master.tar.gz
 mv flatpak-zsh-completion-master ohmyzsh-master/plugins/flatpak
 tar -czf ohmyzsh.tar.gz ohmyzsh-master
 
+chezmoi import --strip-components 1 --destination ${HOME}/.config/zsh/oh-my-zsh ohmyzsh.tar.gz
+mkdir -p ${HOME}/.backups/ohmyzsh
+mv ohmyzsh.tar.gz ${HOME}/.backups/ohmyzsh/ohmyzsh-$(date +"%m-%d-%Y").tar.gz
+
 rm flatpak-zsh-completion.zip
 rm ohmyzsh-master.tar.gz
 rm -r ohmyzsh-master
-
-chezmoi import --strip-components 1 --destination ${HOME}/.oh-my-zsh ohmyzsh.tar.gz
-mkdir -p .backups/ohmyzsh
-mv ohmyzsh.tar.gz .backups/ohmyzsh/ohmyzsh-$(date +"%m-%d-%Y").tar.gz
