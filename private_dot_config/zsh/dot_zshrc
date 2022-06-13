@@ -12,7 +12,7 @@ ENABLE_CORRECTION="true"
 
 plugins=(
     git
-    cargo
+    rust
     cp
     colored-man-pages
     rsync
