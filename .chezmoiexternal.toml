@@ -1,0 +1,18 @@
+[".config/zsh/oh-my-zsh"]
+        type = "archive"
+        url = "https://github.com/robbyrussell/oh-my-zsh/archive/master.tar.gz"
+        exact = true
+        stripComponents = 1
+        refreshPeriod = "168h"
+[".config/zsh/oh-my-zsh/plugins/flatpak"]
+        type = "archive"
+        url = "https://github.com/bilelmoussaoui/flatpak-zsh-completion/archive/master.zip"
+        exact = true
+        stripComponents = 1
+        refreshPeriod = "168h"
+[".config/zsh/oh-my-zsh/custom/themes/spaceship-prompt"]
+        type = "archive"
+        url = "https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v3.16.7.zip"
+        exact = true
+        stripComponents = 1
+        refreshPeriod = "168h"
