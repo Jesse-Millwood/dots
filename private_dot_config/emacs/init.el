@@ -913,6 +913,7 @@
 
 (use-package pdf-tools
   ;; Un-pin this when first installing
+  :disabled
   :pin manual
   :custom
   (pdf-view-display-size 'fit-page)
