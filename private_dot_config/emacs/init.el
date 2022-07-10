@@ -877,11 +877,6 @@
 
 (use-package git-modes)
 
-(use-package calc
-  :hook (calc-mode . (lambda ()
-                       (load (expand-file-name "calc-prog.el" user-emacs-directory))))
-  )
-
 (use-package undo-tree
   :config
   (global-undo-tree-mode))
