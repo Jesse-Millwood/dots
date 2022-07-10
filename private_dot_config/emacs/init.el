@@ -236,7 +236,8 @@
   ))
 
 (use-package doom-modeline
-  :hook (after-init . doom-modeline-init)
+  :hook
+  (after-init . doom-modeline-mode)
   :custom
   (doom-modeline-buffer-file-name-stle 'truncate-upto-project)
   (doom-modeline-height 30)
