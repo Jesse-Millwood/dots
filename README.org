@@ -7,5 +7,5 @@ This is a repository of my dot files where I use [[https://www.chezmoi.io][chezm
 #+BEGIN_SRC sh
 chezmoi init https://github.com/Jesse-Millwood/dots.git
 chezmoi diff
-chezmoi apply
+chezmoi apply --refresh-externals
 #+END_SRC
