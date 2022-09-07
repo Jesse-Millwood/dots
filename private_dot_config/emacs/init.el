@@ -535,8 +535,13 @@
   )
 
 (use-package diff-hl
-  :hook ((prog-mode . diff-hl-margin-mode)
-         (dired-mode . diff-hl-dired-mode))
+  :hook ((prog-mode . diff-hl-mode)
+         (dired-mode . diff-hl-dired-mode)
+         (magit-pre-refresh-hook . diff-hl-magit-prerefresh)
+         (magit-post-refresh-hook . diff-hl-magit-postrefresh))
+  :config
+  (setq vc-git-diff-switches '("--ignore-trailing-space"
+                               "--ignore-all-space"))
   )
 
 ;; Magit-mode-bury-buffer passed true kills the buffer
