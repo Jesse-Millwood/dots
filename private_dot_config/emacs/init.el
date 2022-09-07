@@ -175,6 +175,8 @@
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   )
 
+(use-package ztree)
+
 (use-package ediff
   :init
   (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
