@@ -150,6 +150,7 @@
   (dashboard-set-file-icons t)
   (dashboard-set-init-info t)
   (dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
+  (dashboard-projects-backend 'projectile)
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((bookmarks . 5)
