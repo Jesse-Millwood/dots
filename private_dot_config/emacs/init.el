@@ -487,6 +487,11 @@
 
 ;; General Project/tools
 
+;;(defun projectile-top-down-projectile-file (dir)
+;;  "Look for the .projectile file from top-down along the DIR path."
+;;
+;;  )
+
 (defun projectile-vc-root-dir (dir)
   "Retrieve the root directory of the project at DIR using `vc-root-dir'."
   (let ((default-directory dir))
@@ -499,6 +504,7 @@
   (projectile-completion-system 'ivy)
   (projectile-require-project-root t)
   (projectile-switch-project-action 'projectile-vc)
+  (projectile-auto-discover nil)
   ;; Built universal ctags from https://github.com/universal-ctags/ctags
   ;;  ./autogen.sh
   ;;  ./configure --program-prefix=universal-
@@ -506,13 +512,16 @@
   ;;  sudo make install
   ;; (projectile-tags-command "ctags -Re -f \"%s\" %s \"%s\"")
   ;; A list of functions for finding project roots
-  (projectile-project-root-functions '(projectile-vc-root-dir
-                                       projectile-root-top-down
+  (projectile-project-root-functions '(projectile-root-top-down
+                                       ;;projectile-top-down-projectile-file
+                                       projectile-vc-root-dir
                                        ;; projectile-root-local
                                        projectile-root-bottom-up
                                        projectile-root-top-down-recurring))
   :config
   (counsel-projectile-mode)
+  (projectile-register-project-type 'hfcs '("repo.hfcs")
+                                    :project-file "repo.hfcs")
   :bind
   (:map projectile-mode-map
         ("C-c p" . projectile-command-map))
