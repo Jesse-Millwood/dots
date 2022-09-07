@@ -803,6 +803,7 @@
   :bind ("C-c l" . transient-lsp-dispatch)
   :config
   (load (expand-file-name "transient-lsp.el" user-emacs-directory))
+  (lsp-treemacs-sync-mode 1)
   )
 
 (use-package lsp-treemacs
