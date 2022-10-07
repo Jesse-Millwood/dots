@@ -557,7 +557,6 @@
   :config (global-flycheck-mode))
 
 (use-package company
-;;  :hook (prog-mode . company-mode)
   :custom
 ;;  (company-flx-mode +1)
   (company-show-numbers t)
