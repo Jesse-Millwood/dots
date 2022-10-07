@@ -564,6 +564,10 @@
   (company-idle-delay .1)
   )
 
+(use-package company-box
+  :hook (company-mode . company-box-mode)
+  )
+
 (use-package realgud
   :defer t
   )
