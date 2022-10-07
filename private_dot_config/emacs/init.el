@@ -880,6 +880,8 @@
   (add-hook 'csv-mode-hook 'my-csv-mode-hook)
   )
 
+(use-package bufler)
+
 (use-package pdf-tools
   ;; Un-pin this when first installing
   :disabled
