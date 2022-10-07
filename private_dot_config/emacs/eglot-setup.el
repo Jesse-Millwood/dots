@@ -1,19 +1,15 @@
 ;; Eglot Setup
 
 (use-package eglot
-  :hook ((c-mode . eglot-ensure)
-         (c++mode . eglot-ensure))
+  :hook ((eglot-managed-mode . company-mode)
+         (c-mode . eglot-ensure)
+         (c++-mode . eglot-ensure))
   :config
-
-  (cl-defmethod project-root ((project (head hfcs)))
-    "Return the project root for an HFCS Project"
-    (car (cdr project)))
-
-  (defun project-try-hfcs (dir)
-    (let (( dominating (concat (locate-dominating-file dir "repo.hfcs") "repos")))
-      (list 'hfcs dominating nil nil)
-      )
-    )
-
-  (add-hook 'project-find-functions #'project-try-hfcs)
+  (which-function-mode)
+  (setq-default header-line-format
+                '((which-func-mode ("" which-func-format " "))))
+  (setq mode-line-misc-info
+        ;; We remove Which Function Mode from the mode line, because it's mostly
+        ;; invisible here anyway.
+        (assq-delete-all 'which-func-mode mode-line-misc-info))
   )

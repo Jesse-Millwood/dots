@@ -486,18 +486,6 @@
   (setq flyspell-correct-interface #'flyspell-correct-ivy)
   )
 
-;; General Project/tools
-
-;;(defun projectile-top-down-projectile-file (dir)
-;;  "Look for the .projectile file from top-down along the DIR path."
-;;
-;;  )
-
-(defun projectile-vc-root-dir (dir)
-  "Retrieve the root directory of the project at DIR using `vc-root-dir'."
-  (let ((default-directory dir))
-    (vc-root-dir)))
-
 (use-package projectile
   :hook (prog-mode . projectile-mode)
   :custom
@@ -513,7 +501,8 @@
   ;;  sudo make install
   ;; (projectile-tags-command "ctags -Re -f \"%s\" %s \"%s\"")
   ;; A list of functions for finding project roots
-  (projectile-project-root-functions '(projectile-root-top-down
+  (projectile-project-root-functions '((lambda (d) (projectile-root-top-down d '("repo.hfcs")))
+                                       projectile-root-top-down
                                        ;;projectile-top-down-projectile-file
                                        projectile-vc-root-dir
                                        ;; projectile-root-local
@@ -521,8 +510,7 @@
                                        projectile-root-top-down-recurring))
   :config
   (counsel-projectile-mode)
-  (projectile-register-project-type 'hfcs '("repo.hfcs")
-                                    :project-file "repo.hfcs")
+  (load (expand-file-name "hfcs-projectile.el" user-emacs-directory))
   :bind
   (:map projectile-mode-map
         ("C-c p" . projectile-command-map))
@@ -920,7 +908,8 @@
 (setq extra-files '("chezmoi.el"
                     "newsticker-config.el"
 ;;                    "lsp-setup.el"
-                    "eglot-setup.el"))
+                    "eglot-setup.el"
+                    "hfcs-project.el"))
 (dolist (extra-file extra-files)
   (let ((file-name (expand-file-name extra-file user-emacs-directory)))
     (if (file-exists-p file-name)
