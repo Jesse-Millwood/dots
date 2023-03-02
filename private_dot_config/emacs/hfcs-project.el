@@ -4,6 +4,7 @@
   (car (cdr project)))
 
 (defun project-try-hfcs (dir)
+  "Return HFCS type PROJECT if repo.hfcs exists, otherwise return NIL."
   (let (( dominating-dir (locate-dominating-file dir "repo.hfcs")))
     (if dominating-dir
         (list 'hfcs (concat dominating-dir "repos"))
