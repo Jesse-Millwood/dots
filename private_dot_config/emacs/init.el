@@ -111,6 +111,7 @@
   (visible-bell t "No Audible Bell")
   (indent-tabs-mode nil)
   (word-wrap t)
+  (debug-on-error nil)
   :config
   (winner-mode)
   (global-display-fill-column-indicator-mode)
@@ -121,6 +122,14 @@
   (global-display-line-numbers-mode)
   (load (expand-file-name "extra-emacs-functions.el" user-emacs-directory ))
   (load (expand-file-name "fontsetup.el" user-emacs-directory ))
+  )
+
+(use-package dired
+  :ensure nil
+  :demand
+  :hook (dired-mode . (lambda () (setq truncate-lines t)))
+  :custom
+  (dired-listing-switches "-alFh")
   )
 
 (use-package auth-source
@@ -163,6 +172,7 @@
   :ensure nil
   :hook (after-make-frame-functions . on-frame-open)
   :custom
+  (frame-inhibit-implied-resize t)
   (frame-title-format
    '("" invocation-name ": "(:eval
                              (if (buffer-file-name)
@@ -245,6 +255,7 @@
   (doom-modeline-height 30)
   (x-underline-at-descent-line nil)
   (doom-modeline-project-detection 'projectile)
+  (doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode))
   :config
   (winum-mode)
   (column-number-mode)
@@ -392,6 +403,7 @@
                                space-before-tab
                                tab-mark
                                space-mark
+                               lines
                                newline-mark))
   )
 
@@ -683,7 +695,8 @@
       (ditaa . t)
       (calc . t)
       (gnuplot . t)
-      (python . t)))
+      (python . t)
+      (shell . t)))
 
   (defvar org-capture-templates
     '(
@@ -709,8 +722,7 @@
   )
 
 (use-package org-bullets
-  :defer t
-  :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  :hook (org-mode . org-bullets-mode)
   :config (setq org-bullets-bullet-list
                 '("◉" "◎" "⚫" "○" "►" "◇")))
 
@@ -732,10 +744,7 @@
   :hook (cmake-mode . eldoc-cmake-enable))
 
 (use-package cc-mode
-   :config
-   (add-hook 'c-mode-common-hook
-    (lambda ()
-       (c-set-style "stroustrup")))
+  :hook (c-common-mode . (lambda () (c-set-style "stroustrup")))
   )
 
 (use-package rtags
@@ -807,6 +816,8 @@
   )
 
 (use-package vterm
+  :custom
+  (vterm-max-scrollback 5000)
   )
 
 (use-package super-save
@@ -819,12 +830,11 @@
   )
 
 (use-package ibuffer-projectile
-  :config
-  (add-hook 'ibuffer-hook
-    (lambda ()
+  :hook (ibuffer . (lambda ()
       (ibuffer-projectile-set-filter-groups)
       (unless (eq ibuffer-sorting-mode 'alphabetic)
-        (ibuffer-do-sort-by-alphabetic)))))
+                       (ibuffer-do-sort-by-alphabetic))))
+)
 
 (use-package ibuffer-vc
   )
@@ -882,6 +892,10 @@
 
 (use-package bufler)
 
+(use-package license-templates)
+
+(use-package dired-rsync)
+
 (use-package pdf-tools
   ;; Un-pin this when first installing
   :disabled
@@ -896,6 +910,20 @@
 
   :config
   (pdf-tools-install))
+
+(use-package which-func
+  :after eglot
+  :custom
+  (which-func-unknown "n/a")
+  :config
+  (which-function-mode)
+  (setq-default header-line-format
+                '((which-func-mode ("" which-func-format " "))))
+  (setq mode-line-misc-info
+        ;; Remove which function mode from the mode line, because it's
+        ;; kind of useless
+        (assq-delete-all 'which-func-mode mode-line-misc-info))
+  )
 
 ;; Conditionally Load OCaml files
 (add-to-list 'auto-mode-alist '("\.\(ml\|mli\)\\'" .  (lambda ()
@@ -921,6 +949,9 @@
         (load file-name))
   ))
 
+(add-to-list 'Info-default-directory-list
+             (append '("/usr/local/share/info") Info-default-directory-list))
+
 ;; Reduce gc threshold
 (setq gc-cons-threshold (* 2 1000 1000))
 
@@ -933,3 +964,4 @@
      (format "%.2f seconds"
              (float-time
               (time-subtract after-init-time before-init-time))) gcs-done)
+(put 'erase-buffer 'disabled nil)
