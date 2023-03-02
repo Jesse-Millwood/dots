@@ -7,6 +7,12 @@ function check_for_plugin(){
     [ -d "$ZSH/plugins/$1" ] || [ -d "$ZSH_CUSTOM/plugins/$1" ]
 }
 
+# Check for being an interactive shell
+if [[ "$TERM" == "dumb" ]]; then
+    unsetopt zle
+    export PS1=""
+else
+
 DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
 
@@ -83,6 +89,7 @@ if [ -f ${ZSH_SITEFUNCTIONS_DIR}/zsh-syntax-highlighting.zsh ]; then
     source ${ZSH_SITEFUNCTIONS_DIR}/zsh-syntax-highlighting.zsh
 fi
 
+fi # For interactive shells
 # Conditional PATH Additions _______________________________
 if [ -d /opt/Appimages ]; then
     export PATH=/opt/Appimages:$PATH
