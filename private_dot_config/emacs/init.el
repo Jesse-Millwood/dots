@@ -1047,6 +1047,60 @@ With a prefix ARG, remove start location."
         (load file-name))
     ))
 
+(use-package hfcs-emacs
+  :load-path "~/Code/hfcs-emacs"
+  :commands (gud-gdb hfcs-compile-make)
+  :custom
+  ;; (host-gdb-bin "/home/hfcs/Toolchains/x86_64-unknown-linux-gnu/bin/gdb")
+  (hfcs-windriver-dir "~/WindRiver")
+  (compilation-scroll-output t)
+  :config
+  ;; Catch the UtAssert test failures
+  (add-to-list 'compilation-error-regexp-alist
+               `(,hfcs-utassert-error-regex 1 2))
+  ;; (setq compilation-error-regexp-alist (cdr compilation-error-regexp-alist))
+  )
+
+(use-package hfcs-gitlab
+  :load-path "~/Code/hfcs-emacs"
+  :after org
+  :commands (hfcs-gl-insert-issue-org))
+
+(use-package hfcs-magit
+  :load-path "~/Code/hfcs-emacs"
+  :after magit
+  :commands (magit-hfcs-check-enable)
+  :init
+  (add-hook 'magit-mode-hook #'magit-hfcs-check-enable 100))
+(use-package hfcs-org
+  :load-path "~/Code/hfcs-emacs"
+  :after org
+  :commands (hfcs-org-insert-issue-note-template
+             hfcs-org-insert-troubleshooting-section
+             hfcs-org-make-issue-note-from-todo))
+(use-package hfcs-project
+;;  :demand t
+  :load-path "~/Code/hfcs-emacs"
+  :after (:all project projectile)
+  :autoload project-try-hfcs
+  :config
+  (add-hook 'project-find-functions #'project-try-hfcs)
+  )
+(use-package hfcs-projectile
+  ;;  :demand t
+  :load-path "~/Code/hfcs-emacs"
+  :after projectile
+  :autoload projectile-vc-root-dir
+  :init
+  (setq  projectile-project-root-functions
+       '((lambda (d) (projectile-root-top-down d '("repo.hfcs")))
+         projectile-root-top-down
+         ;;projectile-top-down-projectile-file
+         projectile-vc-root-dir
+         ;; projectile-root-local
+         projectile-root-bottom-up
+         projectile-root-top-down-recurring)))
+
 (add-to-list 'Info-default-directory-list
              (append '("/usr/local/share/info") Info-default-directory-list))
 
