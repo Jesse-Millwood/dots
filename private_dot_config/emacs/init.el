@@ -446,8 +446,8 @@
 
 (use-package rg
   ;; Use "C-c s" for rg-menu to customize the search
+  :commands 'rg
   :ensure-system-package (rg . ripgrep)
-  :demand
   )
 
 ;; Writing/Prose Packages
