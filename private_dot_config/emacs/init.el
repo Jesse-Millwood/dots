@@ -534,6 +534,8 @@
   (setq flyspell-correct-interface #'flyspell-correct-ivy)
   )
 
+(use-package powerthesaurus)
+
 (use-package projectile
   :hook (prog-mode . projectile-mode)
   :custom
