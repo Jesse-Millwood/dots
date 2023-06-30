@@ -122,8 +122,10 @@
   (tool-bar-mode -1)
   (global-auto-revert-mode)
   (global-display-line-numbers-mode)
-  (load (expand-file-name "extra-emacs-functions.el" user-emacs-directory ))
-  (load (expand-file-name "fontsetup.el" user-emacs-directory ))
+  (load (expand-file-name "extra-emacs-functions.el"
+                          (file-name-concat user-emacs-directory "lisp")))
+  (load (expand-file-name "fontsetup.el"
+                          (file-name-concat user-emacs-directory "lisp")))
   )
 
 (use-package dired
@@ -579,11 +581,15 @@
   ;; (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
   ;; (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   (set-face-foreground 'magit-branch-current "green")
-  (load (expand-file-name "gerrit-utils.el" user-emacs-directory))
   :bind (("C-x g" . magit-status)
          ("C-x M-g" . magit-dispatch-popup)
          (:map magit-mode-map
                ("q". (lambda() (interactive (magit-mode-bury-buffer t)))))))
+
+(use-package gerrit-utils
+  :after magit
+  :load-path (lambda ()
+                (file-name-concat user-emacs-directory "lisp")))
 
 (use-package transient
   :custom
@@ -989,6 +995,14 @@
         (assq-delete-all 'which-func-mode mode-line-misc-info))
   )
 
+(use-package ocaml-setup
+  :mode "\.\(ml\|mli\)\\'"
+  :load-path (lambda () (file-name-concat user-emacs-directory "lisp"))
+  :config
+  (when (file-exists-p "~/.opam")
+    (tuareg-mode))
+  )
+
 (use-package org-noter)
 (use-package org-pdftools
   :hook (org-mode . org-pdftools-setup-link))
@@ -1025,27 +1039,16 @@ With a prefix ARG, remove start location."
   (with-eval-after-load 'pdf-annot
     (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note)))
 
-;; Conditionally Load OCaml files
-(add-to-list 'auto-mode-alist '("\.\(ml\|mli\)\\'" .  (lambda ()
-                                              (if (file-exists-p "~/.opam")
-                                                  (progn
-                                                    (load "~/.emacs.d/ocaml-setup.el")
-                                                    (tuareg-mode))
-                                                ))))
 
-;; Machine Specific files
-(if (or (string-equal system-name "masten") (string-equal user-login-name "jmillwood"))
-    (load (expand-file-name "masten.el" user-emacs-directory)))
+;; Contitonally Load Custom Packages _________________________________
+(use-package chezmoi
+  :load-path (lambda () (file-name-concat user-emacs-directory "lisp"))
+  :commands (chezmoi|magit-status chezmoi|ediff))
 
-;; Contitonally Load Custom files ____________________________________
-(setq extra-files '(;;"chezmoi.el"
-                    ;;"newsticker-config.el"
-                    "eglot-setup.el"))
-(dolist (extra-file extra-files)
-  (let ((file-name (expand-file-name extra-file user-emacs-directory)))
-    (if (file-exists-p file-name)
-        (load file-name))
-    ))
+(use-package eglot-setup
+  :load-path (lambda () (file-name-concat user-emacs-directory "lisp"))
+  :demand t
+  )
 
 (use-package hfcs-emacs
   :load-path "~/Code/hfcs-emacs"
