@@ -873,15 +873,15 @@
   (super-save-mode +1)
   )
 
-(use-package ibuffer-projectile
-  :hook (ibuffer . (lambda ()
-      (ibuffer-projectile-set-filter-groups)
-      (unless (eq ibuffer-sorting-mode 'alphabetic)
-                       (ibuffer-do-sort-by-alphabetic))))
-)
-
-(use-package ibuffer-vc
-  )
+;; (use-package ibuffer-projectile
+;;   :hook (ibuffer . (lambda ()
+;;       (ibuffer-projectile-set-filter-groups)
+;;       (unless (eq ibuffer-sorting-mode 'alphabetic)
+;;                        (ibuffer-do-sort-by-alphabetic))))
+;; )
+;;
+;; (use-package ibuffer-vc
+;;   )
 
 (use-package diredfl
   :hook ((dired-mode . diredfl-mode))
