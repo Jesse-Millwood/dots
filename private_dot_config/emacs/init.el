@@ -544,39 +544,26 @@
   (projectile-require-project-root t)
   (projectile-switch-project-action 'projectile-vc)
   (projectile-auto-discover nil)
-  ;; Built universal ctags from https://github.com/universal-ctags/ctags
-  ;;  ./autogen.sh
-  ;;  ./configure --program-prefix=universal-
-  ;;  make
-  ;;  sudo make install
-  ;; (projectile-tags-command "ctags -Re -f \"%s\" %s \"%s\"")
-  ;; A list of functions for finding project roots
-  (projectile-project-root-functions '((lambda (d) (projectile-root-top-down d '("repo.hfcs")))
-                                       projectile-root-top-down
-                                       ;;projectile-top-down-projectile-file
-                                       projectile-vc-root-dir
-                                       ;; projectile-root-local
-                                       projectile-root-bottom-up
-                                       projectile-root-top-down-recurring))
+
   :config
-  (counsel-projectile-mode)
-  (load (expand-file-name "hfcs-projectile.el" user-emacs-directory))
+;;  (counsel-projectile-mode)
   :bind
   (:map projectile-mode-map
         ("C-c p" . projectile-command-map))
   )
 
-(use-package counsel-projectile
-  :after projectile
-  :custom
-  (counsel-projectile-switch-project-action 'counsel-projectile-switch-project-action-dired)
-  )
+;; (use-package counsel-projectile
+;;   :after projectile
+;;   :custom
+;;   (counsel-projectile-switch-project-action 'counsel-projectile-switch-project-action-dired)
+;;   )
 
 (use-package diff-hl
   :hook ((prog-mode . diff-hl-mode)
          (dired-mode . diff-hl-dired-mode)
          (magit-pre-refresh-hook . diff-hl-magit-prerefresh)
-         (magit-post-refresh-hook . diff-hl-magit-postrefresh))
+         (magit-post-refresh-hook . diff-hl-magit-postrefresh)
+         )
   :config
   (setq vc-git-diff-switches '("--ignore-trailing-space"
                                "--ignore-all-space"))
