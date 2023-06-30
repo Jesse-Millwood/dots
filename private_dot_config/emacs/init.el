@@ -254,18 +254,21 @@
     (setq doom-modeline-major-mode-icon t)
   ))
 
-(use-package doom-modeline
-  :hook
-  (after-init . doom-modeline-mode)
-  :custom
-  (doom-modeline-buffer-file-name-stle 'truncate-upto-project)
-  (doom-modeline-height 30)
-  (x-underline-at-descent-line nil)
-  (doom-modeline-project-detection 'projectile)
-  (doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode))
   :config
-  (add-hook 'after-make-frame-functions #'enable-doom-modeline-icons)
-  )
+;(use-package doom-modeline
+;  :hook
+;  (after-init . doom-modeline-mode)
+;  :custom
+;  (doom-modeline-buffer-file-name-stle 'truncate-upto-project)
+;  (doom-modeline-height 30)
+;  (x-underline-at-descent-line nil)
+;  (doom-modeline-project-detection 'projectile)
+;  (doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode))
+;  :config
+;  (winum-mode)
+;  (column-number-mode)
+;  (add-hook 'after-make-frame-functions #'enable-doom-modeline-icons)
+;  )
 
 ;; UI Packages
 
