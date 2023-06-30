@@ -430,7 +430,6 @@
   :hook (prog-mode LaTeX-mode markdown-mode conf-mode)
   :custom
   (whitespace-line-column 100)
-  :config
   (whitespace-style '(face
                                tabs
                                spaces
