@@ -1051,7 +1051,7 @@ With a prefix ARG, remove start location."
 
 (use-package hfcs-emacs
   :load-path "~/Code/hfcs-emacs"
-  :commands (gud-gdb hfcs-compile-make)
+  :commands (hfcs-gdb-ut hfcs-compile-make c-set-style)
   :custom
   ;; (host-gdb-bin "/home/hfcs/Toolchains/x86_64-unknown-linux-gnu/bin/gdb")
   (hfcs-windriver-dir "~/WindRiver")
