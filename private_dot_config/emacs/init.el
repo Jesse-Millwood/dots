@@ -114,6 +114,8 @@
   (debug-on-error nil)
   :config
   (winner-mode)
+  (winum-mode)
+  (column-number-mode)
   (global-display-fill-column-indicator-mode)
   (global-hl-line-mode 1)
   (set-face-attribute hl-line-face nil :background "#254175")
@@ -261,8 +263,6 @@
   (doom-modeline-project-detection 'projectile)
   (doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode))
   :config
-  (winum-mode)
-  (column-number-mode)
   (add-hook 'after-make-frame-functions #'enable-doom-modeline-icons)
   )
 
