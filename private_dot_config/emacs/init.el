@@ -130,6 +130,7 @@
   :hook (dired-mode . (lambda () (setq truncate-lines t)))
   :custom
   (dired-listing-switches "-alFh")
+  (dired-dwim-target t)
   )
 
 (use-package tramp
