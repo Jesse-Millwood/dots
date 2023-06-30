@@ -1038,16 +1038,14 @@ With a prefix ARG, remove start location."
     (load (expand-file-name "masten.el" user-emacs-directory)))
 
 ;; Contitonally Load Custom files ____________________________________
-(setq extra-files '("chezmoi.el"
-                    "newsticker-config.el"
-;;                    "lsp-setup.el"
-                    "eglot-setup.el"
-                    "hfcs-project.el"))
+(setq extra-files '(;;"chezmoi.el"
+                    ;;"newsticker-config.el"
+                    "eglot-setup.el"))
 (dolist (extra-file extra-files)
   (let ((file-name (expand-file-name extra-file user-emacs-directory)))
     (if (file-exists-p file-name)
         (load file-name))
-  ))
+    ))
 
 (add-to-list 'Info-default-directory-list
              (append '("/usr/local/share/info") Info-default-directory-list))
