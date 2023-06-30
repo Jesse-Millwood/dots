@@ -835,13 +835,14 @@
   )
 
 (use-package python-mode
-  :ensure nil
+  :mode "\\.py\\'"
   :custom
   (python-indent-offset 4)
   (python-shell-interpreter "python3")
   )
 
 (use-package pyvenv
+  :after python
   :custom
   (pdb-command-name "python3 -m pdb")
   :init
@@ -853,6 +854,7 @@
 )
 
 (use-package csharp-mode
+  :mode "\\.cs\\'"
     :config
     (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode))
   )
