@@ -590,6 +590,22 @@
   (transient-enable-popup-navigation 't)
   )
 
+(use-package magit-todos
+  :after magit
+  :config
+  (magit-todos-mode))
+
+(use-package titlecase)
+(use-package helpful
+  :bind
+  (:map global-map
+        ("C-h f"   . helpful-callable)
+        ("C-h v"   . helpful-variable)
+        ("C-h k"   . helpful-key)
+        ("C-h x"   . helpful-command)
+        ("C-c C-d" . helpful-at-point)
+        ("C-h F"   . helpful-function)))
+
 (use-package flycheck
   :config (global-flycheck-mode))
 
