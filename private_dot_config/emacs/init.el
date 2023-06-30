@@ -254,7 +254,35 @@
     (setq doom-modeline-major-mode-icon t)
   ))
 
+;; (use-package simple-modeline
+;;   :hook (after-init . simple-modeline-mode)
+;;   :custom
+;;   (simple-modeline-segments
+;;    '((simple-modeline-segment-modified
+;;      simple-modeline-segment-buffer-name
+;;      simple-modeline-segment-position)
+;;     (;;simple-modeline-segment-minor-modes
+;;      simple-modeline-segment-input-method
+;;      simple-modeline-segment-eol
+;;      simple-modeline-segment-encoding
+;;      simple-modeline-segment-vc
+;;      simple-modeline-segment-misc-info
+;;      simple-modeline-segment-process
+;;      simple-modeline-segment-major-mode)))
+;;   )
+
+(use-package telephone-line
+  :hook (after-init . telephone-line-mode)
   :config
+  (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
+        telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
+        telephone-line-primary-right-separator 'telephone-line-cubed-right
+        telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
+  (setq telephone-line-height 24
+        telephone-line-evil-use-short-tag t)
+  )
+
+
 ;(use-package doom-modeline
 ;  :hook
 ;  (after-init . doom-modeline-mode)
