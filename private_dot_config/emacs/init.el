@@ -429,7 +429,7 @@
   :custom
   (whitespace-line-column 100)
   :config
-  (whitespace-toggle-options '(face
+  (whitespace-style '(face
                                tabs
                                spaces
                                newline
@@ -439,7 +439,7 @@
                                space-before-tab
                                tab-mark
                                space-mark
-                               lines
+                      lines-tail
                                newline-mark))
   )
 
