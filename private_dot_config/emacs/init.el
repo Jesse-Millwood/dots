@@ -154,25 +154,26 @@
     (exec-path-from-shell-initialize))
     )
 
-(use-package dashboard
-  :demand t
-  :hook
-  (dashboard-mode . (lambda () (display-fill-column-indicator-mode 0)))
-  :custom
-  (dashboard-center-content t)
-  (dashboard-startup-banner 'logo)
-  (dashboard-set-heading-icons t)
-  (dashboard-set-file-icons t)
-  (dashboard-set-init-info t)
-  (dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
-  (dashboard-projects-backend 'projectile)
-  :config
-  (dashboard-setup-startup-hook)
-  (setq dashboard-items '((bookmarks . 5)
-                          (recents . 5)
-                          (projects . 5)
-                          (agenda . 5)
-                          )))
+;; (use-package dashboard
+;;   :demand t
+;;   :hook
+;;   (dashboard-mode . (lambda () (display-fill-column-indicator-mode 0)))
+;;   :custom
+;;   (dashboard-center-content t)
+;;   (dashboard-startup-banner 'logo)
+;;   (dashboard-set-heading-icons t)
+;;   (dashboard-set-file-icons t)
+;;   (dashboard-set-init-info t)
+;;   (dashboard-icon-type 'all-the-icons)
+;;   (dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
+;; ;;  (dashboard-projects-backend 'projectile)
+;;   :config
+;;   (dashboard-setup-startup-hook)
+;;   (setq dashboard-items '((bookmarks . 5)
+;;                           (recents . 5)
+;; ;;                          (projects . 5)
+;; ;;                          (agenda . 5)
+;;                           )))
 
 (use-package frame
   :ensure nil
@@ -185,11 +186,11 @@
                                  (abbreviate-file-name (buffer-file-name))
                                "%b")
                              )))
-  :if (< (length command-line-args) 2)
-  :config (dashboard-setup-startup-hook)
+;  :if (< (length command-line-args) 2)
+;  :config (dashboard-setup-startup-hook)
 
   :config
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+;;  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   )
 
 (use-package ztree)
