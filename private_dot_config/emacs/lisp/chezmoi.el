@@ -39,7 +39,7 @@
   (with-temp-buffer
     (let ((files '())
           (search-p t))
-      (shell-command "chezmoi diff" (current-buffer))
+      (shell-command "chezmoi diff --exclude=externals" (current-buffer))
       (save-excursion
         (goto-char (point-min))
         (while (not (eq search-p nil))
@@ -62,7 +62,7 @@
     (with-current-buffer b
       (diff-mode)
       (whitespace-mode 0)
-      (shell-command "chezmoi diff" b))))
+      (shell-command "chezmoi diff --exclude=externals" b))))
 
 (defun chezmoi|changed-p (f)
   "TODO."

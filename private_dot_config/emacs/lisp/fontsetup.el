@@ -43,7 +43,10 @@
                (font-size (cdr (nth font-list-index font-list))))
           (set-frame-font (format "%s-%i"
                                   font-family
-                                  font-size))
+                                  font-size)
+                          nil ;; Keep Size
+                          t   ;; Apply to child frames
+                          )
         (add-to-list 'default-frame-alist
                      `(font . ,(format "%s-%i"
                                        font-family
