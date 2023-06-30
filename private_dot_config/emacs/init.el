@@ -976,7 +976,7 @@
   (pdf-tools-install))
 
 (use-package which-func
-  :after eglot
+  :after eglot prog
   :custom
   (which-func-unknown "n/a")
   :config
