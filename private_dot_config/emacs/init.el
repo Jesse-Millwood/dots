@@ -737,7 +737,8 @@
       (calc . t)
       (gnuplot . t)
       (python . t)
-      (shell . t)))
+      (shell . t)
+      (java . t)))
 
   (defvar org-capture-templates
     '(
