@@ -1057,13 +1057,17 @@ With a prefix ARG, remove start location."
   :demand t
   )
 
+(when (file-exists-p "~/Code/hfcs-emacs")
 (use-package hfcs-emacs
   :load-path "~/Code/hfcs-emacs"
-  :commands (hfcs-gdb-ut hfcs-compile-make c-set-style)
+    :commands (hfcs-gdb-ut hfcs-compile-make hfcs-compile-clean)
+    :autoload (hfcs-c-add-styles)
   :custom
   ;; (host-gdb-bin "/home/hfcs/Toolchains/x86_64-unknown-linux-gnu/bin/gdb")
   (hfcs-windriver-dir "~/WindRiver")
   (compilation-scroll-output t)
+    :init
+    (add-hook 'c-mode-common-hook #'hfcs-c-add-styles)
   :config
   ;; Catch the UtAssert test failures
   (add-to-list 'compilation-error-regexp-alist
@@ -1110,6 +1114,12 @@ With a prefix ARG, remove start location."
          ;; projectile-root-local
          projectile-root-bottom-up
          projectile-root-top-down-recurring)))
+  (use-package org-timesheet
+    :load-path "~/Code/hfcs-emacs"
+    :after org
+    :autoload org-dblock-write:timesheet)
+  )
+
 (use-package breadcrumb)
 
 (add-to-list 'Info-default-directory-list
