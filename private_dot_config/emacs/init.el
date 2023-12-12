@@ -279,17 +279,40 @@
 ;;      simple-modeline-segment-major-mode)))
 ;;   )
 
-(use-package telephone-line
-  :hook (after-init . telephone-line-mode)
-  :config
-  (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
-        telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
-        telephone-line-primary-right-separator 'telephone-line-cubed-right
-        telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
-  (setq telephone-line-height 24
-        telephone-line-evil-use-short-tag t)
-  )
+;; (use-package telephone-line
+;;   :hook (after-init . telephone-line-mode)
+;;   :config
+;;   (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
+;;         telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
+;;         telephone-line-primary-right-separator 'telephone-line-cubed-right
+;;         telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
+;;   (setq telephone-line-height 24
+;;         telephone-line-evil-use-short-tag nil)
+;;   )
 
+(use-package spaceline
+  :hook (after-init . spaceline-spacemacs-theme)
+  :config
+  (spaceline-define-segment
+      ati-modified "An `all-the-icons' modified segment"
+      (let* ((config-alist
+              '(("*" all-the-icons-faicon-family all-the-icons-faicon "chain-broken" :height 1.2 :v-adjust -0.0)
+                ("-" all-the-icons-faicon-family all-the-icons-faicon "link" :height 1.2 :v-adjust -0.0)
+                ("%" all-the-icons-octicon-family all-the-icons-octicon "lock" :height 1.2 :v-adjust 0.1)))
+             (result (cdr (assoc (format-mode-line "%*") config-alist))))
+
+        (propertize (format "%s" (apply (cadr result) (cddr result))) 'face `(:family ,(funcall (car result)) :inherit )))
+      :tight t)
+
+  ;; (spaceline-compile
+  ;;   ;; left
+  ;;   '()
+  ;;   ;;right
+  ;;   '()
+  ;;   )
+
+
+  )
 
 ;(use-package doom-modeline
 ;  :hook
