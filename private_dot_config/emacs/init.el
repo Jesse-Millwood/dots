@@ -550,6 +550,14 @@
          (LaTeX-mode . flyspell-mode)
          (markdown-mode . flyspell-mode)
          (text-mode . flyspell-mode))
+  :config
+  (when (string-equal system-type "darwin") ; Only for macOs
+  ;; Dictionary file name
+    (setenv "DICTIONARY" "en_US"))
+  (setq ispell-program-name "hunspell")
+  (setq ispell-local-dictionary "en_US")
+  (setq ispell-local-dictionary-alist
+        '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
   )
 
 (use-package flyspell-correct-ivy
