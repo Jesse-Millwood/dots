@@ -1176,7 +1176,12 @@ With a prefix ARG, remove start location."
     :autoload org-dblock-write:timesheet)
   )
 
-(use-package breadcrumb)
+(use-package breadcrumb
+  :hook (prog-mode)
+  )
+
+(use-package imenu-list
+  :hook (prog-mode org-mode))
 
 (add-to-list 'Info-default-directory-list
              (append '("/usr/local/share/info") Info-default-directory-list))
