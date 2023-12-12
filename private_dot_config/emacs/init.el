@@ -129,6 +129,11 @@
                           (file-name-concat user-emacs-directory "lisp")))
   )
 
+(use-package eldoc
+  :custom
+  (eldoc-echo-area-prefer-doc-buffer t)
+)
+
 (use-package dired
   :ensure nil
   :demand
@@ -903,6 +908,8 @@
   :mode "\\meson.build\\'"
   )
 
+(use-package lua-mode)
+
 (use-package kconfig-mode
   :mode "\\Kconfig\\'")
 
@@ -1103,6 +1110,7 @@ With a prefix ARG, remove start location."
          ;; projectile-root-local
          projectile-root-bottom-up
          projectile-root-top-down-recurring)))
+(use-package breadcrumb)
 
 (add-to-list 'Info-default-directory-list
              (append '("/usr/local/share/info") Info-default-directory-list))
