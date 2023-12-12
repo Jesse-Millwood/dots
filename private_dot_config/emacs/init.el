@@ -1019,7 +1019,6 @@
   (mastodon-active-user "@jesse_m")
   (mastodon-tl--show-avatars t)
   :config
-  (setq mastodon)
   (require 'mastodon-async)
   (require 'discover)
   (mastodon-discover)
