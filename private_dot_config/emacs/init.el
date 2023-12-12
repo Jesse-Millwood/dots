@@ -952,6 +952,7 @@
 
 (use-package tree-sitter-langs)
 (use-package tree-sitter
+  :hook (prog-mode . tree-sitter-hl-mode)
   :config
   (require 'tree-sitter-langs)
   (global-tree-sitter-mode))
