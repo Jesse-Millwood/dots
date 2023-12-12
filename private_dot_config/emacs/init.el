@@ -804,6 +804,20 @@
 (use-package ob-bitfield
   :after org)
 
+(use-package org-download
+  :after org
+  :commands (org-download-screenshot
+             org-download-clipboard
+             org-download-image
+             org-download-yank
+             org-download-rename-last-file
+             org-download-delete)
+  :custom
+  (org-download-image-dir "./imgs")
+  :config
+  (add-hook 'dired-mode-hook 'org-download-enable)
+  )
+
 (use-package org-appear
   :after org
   :hook (org-mode . org-appear-mode))
