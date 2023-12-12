@@ -1177,7 +1177,7 @@ With a prefix ARG, remove start location."
   )
 
 (use-package breadcrumb
-  :hook (prog-mode)
+  :hook (prog-mode . breadcrumb-mode)
   )
 
 (use-package imenu-list
