@@ -776,11 +776,15 @@
     'org-babel-load-languages
     '((org . t)
       (ditaa . t)
+      (bitfield . t)
       (calc . t)
       (gnuplot . t)
       (python . t)
+      (C . t)
+      (dot . t)
       (shell . t)
-      (java . t)))
+      (java . t)
+      ))
 
   (defvar org-capture-templates
     '(
@@ -796,6 +800,9 @@
           (agenda "")
           (alltodo "")))))
   )
+
+(use-package ob-bitfield
+  :after org)
 
 (use-package org-appear
   :after org
