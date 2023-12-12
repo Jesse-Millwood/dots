@@ -1057,6 +1057,10 @@ With a prefix ARG, remove start location."
   :demand t
   )
 
+;; (use-package modeline-region
+;;   :load-path (lambda () (file-name-concat user-emacs-directory "lisp"))
+;;   :demand t
+;;   )
 (when (file-exists-p "~/Code/hfcs-emacs")
 (use-package hfcs-emacs
   :load-path "~/Code/hfcs-emacs"
