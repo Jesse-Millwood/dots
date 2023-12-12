@@ -97,6 +97,8 @@
    (text-mode . (lambda () (set-fill-column 80)))
    (after-init . set-font-preference)
    (server-after-make-frame . set-font-preference)
+   (text-mode . (lambda () (display-line-numbers-mode 1)))
+   (prog-mode . (lambda () (display-line-numbers-mode 1)))
    )
   :bind
   (:map global-map
@@ -121,7 +123,6 @@
   (set-face-attribute hl-line-face nil :background "#254175")
   (tool-bar-mode -1)
   (global-auto-revert-mode)
-  (global-display-line-numbers-mode)
   (load (expand-file-name "extra-emacs-functions.el"
                           (file-name-concat user-emacs-directory "lisp")))
   (load (expand-file-name "fontsetup.el"
