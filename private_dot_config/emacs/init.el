@@ -1041,7 +1041,8 @@
   (pdf-tools-install))
 
 (use-package which-func
-  :after eglot prog
+  :hook (prog)
+  :commands (which-function-mode)
   :custom
   (which-func-unknown "n/a")
   :config
