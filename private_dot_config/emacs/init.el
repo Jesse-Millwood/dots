@@ -1188,6 +1188,14 @@ With a prefix ARG, remove start location."
 
 (use-package string-inflection)
 
+(use-package geiser-guile)
+(use-package geiser
+  :custom
+  (geiser-active-implementations '(guile))
+  (geiser-scheme-implementation '(guile))
+  (geiser-guile-binary "/usr/bin/guile")
+  )
+
 (add-to-list 'Info-default-directory-list
              (append '("/usr/local/share/info") Info-default-directory-list))
 
