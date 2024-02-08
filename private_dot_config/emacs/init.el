@@ -1181,8 +1181,8 @@ With a prefix ARG, remove start location."
   )
 
 (use-package imenu-list
-  :hook ((prog-mode . imenu-list-minor-mode)
-         (org-mode . imenu-list-minor-mode))
+  ;; :hook ((prog-mode . imenu-list-minor-mode)
+  ;;        (org-mode . imenu-list-minor-mode))
   )
 
 (add-to-list 'Info-default-directory-list
