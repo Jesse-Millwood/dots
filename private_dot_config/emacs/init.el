@@ -1186,6 +1186,8 @@ With a prefix ARG, remove start location."
   ;;        (org-mode . imenu-list-minor-mode))
   )
 
+(use-package string-inflection)
+
 (add-to-list 'Info-default-directory-list
              (append '("/usr/local/share/info") Info-default-directory-list))
 
