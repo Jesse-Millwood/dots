@@ -1129,7 +1129,7 @@ With a prefix ARG, remove start location."
 (when (file-exists-p "~/Code/hfcs-emacs")
 (use-package hfcs-emacs
   :load-path "~/Code/hfcs-emacs"
-    :commands (hfcs-gdb-ut hfcs-compile-make hfcs-compile-clean)
+    :commands (hfcs-gdb-ut hfcs-realgud-gdb-ut hfcs-compile-make hfcs-compile-clean)
     :autoload (hfcs-c-add-styles)
   :custom
   ;; (host-gdb-bin "/home/hfcs/Toolchains/x86_64-unknown-linux-gnu/bin/gdb")
