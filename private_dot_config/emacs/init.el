@@ -544,7 +544,7 @@
 
 (use-package flyspell
   :custom
-  (ispell-dictionary "american")
+  (ispell-dictionary "en_US")
   :hook ((org-mode . flyspell-mode)
          (latex-mode . flyspell-mode)
          (LaTeX-mode . flyspell-mode)
@@ -556,8 +556,8 @@
     (setenv "DICTIONARY" "en_US"))
   (setq ispell-program-name "hunspell")
   (setq ispell-local-dictionary "en_US")
-  (setq ispell-local-dictionary-alist
-        '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
+  ;; (setq ispell-local-dictionary-alist
+  ;;      '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
   )
 
 (use-package flyspell-correct-ivy
