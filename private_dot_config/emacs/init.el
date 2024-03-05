@@ -844,6 +844,8 @@
   :config (setq org-bullets-bullet-list
                 '("◉" "◎" "⚫" "○" "►" "◇")))
 
+(use-package adoc-mode)
+
 (use-package bitbake
   :mode ("\\.bb\\'" . bitbake-mode)
   )
