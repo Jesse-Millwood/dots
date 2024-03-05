@@ -784,6 +784,7 @@
       (dot . t)
       (shell . t)
       (java . t)
+      (mermaid . t)
       ))
 
   (defvar org-capture-templates
@@ -803,6 +804,18 @@
 
 (use-package ob-bitfield
   :after org)
+
+(use-package ob-mermaid
+  :custom
+  ;; (ob-mermaid-cli-path (shell-command-to-string
+  ;;                       "npx -p @mermaid-js/mermaid-cli@latest command -v mmdc"))
+  (ob-mermaid-cli-path "/home/hfcs/.npm/_npx/23232c69e5d221f3/node_modules/.bin/mmdc")
+  )
+
+(use-package ox-asciidoc)
+
+(use-package ox-hugo
+  :after ox)
 
 (use-package org-download
   :after org
@@ -1007,9 +1020,6 @@
 (use-package dired-rsync)
 
 (use-package multi-vterm)
-
-(use-package ox-hugo
-  :after ox)
 
 (use-package discover)
 
