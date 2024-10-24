@@ -1021,7 +1021,14 @@
 
 (use-package dired-rsync)
 
-(use-package multi-vterm)
+(use-package multi-vterm
+  :autoload (multi-vterm
+             multi-vterm-project
+             multi-vterm-dedicated-open
+             multi-vterm-dedicated-close
+             multi-vterm-dedicated-toggle
+             multi-vterm-dedicated-select
+             multi-vterm-get-buffer))
 
 (use-package discover)
 
