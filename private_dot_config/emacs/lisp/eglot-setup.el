@@ -15,8 +15,16 @@
                       "--clang-tidy"
                       "--completion-style=detailed"
                       "--pch-storage=memory"
-                      "--header-insertion=header"
-                      "--never-insertion-decorators=0")))
+                      "--header-insertion=never"
+                      "--header-insertion-decorators=0"
+                      "--query-driver=/**/*")))
+  (add-to-list 'eglot-server-programs
+               '((ada-ts-mode)
+                 . ("ada_language_server")))
+  (add-to-list 'eglot-server-programs
+               '((gpr-ts-mode)
+                 . ("ada_language_server")))
+
   )
 
 (use-package flycheck-eglot
