@@ -945,12 +945,9 @@
   :hook ((dired-mode . diredfl-mode))
   )
 
-(use-package tree-sitter-langs)
-(use-package tree-sitter
-  :hook (prog-mode . tree-sitter-hl-mode)
+(use-package treesit-auto
   :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode))
+  (global-treesit-auto-mode))
 
 (use-package meson-mode
   :mode "\\meson.build\\'"
