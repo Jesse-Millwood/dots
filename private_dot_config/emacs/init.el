@@ -542,34 +542,10 @@
 
 (use-package diminish)
 
-(use-package flyspell
-  :custom
-  (ispell-dictionary "en_US")
-  :hook ((org-mode . flyspell-mode)
-         (latex-mode . flyspell-mode)
-         (LaTeX-mode . flyspell-mode)
-         (markdown-mode . flyspell-mode)
-         (text-mode . flyspell-mode))
-  :config
-  (when (string-equal system-type "darwin") ; Only for macOs
-  ;; Dictionary file name
-    (setenv "DICTIONARY" "en_US"))
-  (setq ispell-program-name "hunspell")
-  (setq ispell-local-dictionary "en_US")
-  ;; (setq ispell-local-dictionary-alist
-  ;;      '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
-  )
-
-(use-package flyspell-correct-ivy
-  :after (flyspell)
-  :commands (flyspell-correct-ivy flyspell-correct-wrapper)
-  :bind
-  (:map flyspell-mode-map
-        ("C-;" . flyspell-correct-wrapper)
-   :map flyspell-mouse-map
-   ("<C-down-mouse-3>" . flyspell-correct-word))
-  :init
-  (setq flyspell-correct-interface #'flyspell-correct-ivy)
+(use-package jinx
+  ; :hook (emacs-startup . global-jinx-mode)
+  :bind (("M-$" . jinx-correct)
+         ("C-M-$" . jinx-languages))
   )
 
 (use-package powerthesaurus)
