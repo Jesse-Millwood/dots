@@ -824,6 +824,10 @@
 
 (use-package bitbake
   :mode ("\\.bb\\'" . bitbake-mode)
+  :mode ("\\.bbappend\\'" . bitbake-mode)
+  :mode ("\\.bbclass\\'" . bitbake-mode)
+  :mode ("\\.conf\\'" . bitbake-mode)
+  :mode ("\\.inc\\'" . bitbake-mode)
   )
 
 (use-package dts-mode
