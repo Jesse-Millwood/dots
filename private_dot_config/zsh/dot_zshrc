@@ -60,7 +60,7 @@ if [ -d "${ZSH_CUSTOM}/themes/spaceship-prompt" ]; then
         dotnet        # .NET section
         exec_time     # Execution time
         line_sep      # Line break
-        battery       # Battery level and status
+        # battery       # Battery level and status
         jobs          # Background jobs indicator
         exit_code     # Exit code section
         char          # Prompt character
