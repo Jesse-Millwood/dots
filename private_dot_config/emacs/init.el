@@ -352,20 +352,6 @@
     )
 )
 
-;; (use-package centaur-tabs
-;;   :demand
-;;   :custom
-;;   (centaur-tabs-style "rounded")
-;;   (centaur-tabs-set-bar 'over)
-;;   (centaur-tabs-set-modified-marker t)
-;;   (centaur-tabs-modified-marker "●")
-;;   (centaur-tabs-enable-key-bindings t)
-;;   :config
-;;   (centaur-tabs-mode t)
-;;   (centaur-tabs-group-by-projectile-project)
-;;   (add-hook 'after-make-frame-functions #'enable-centaur-icons)
-;;   (setq centaur-tabs-set-icons (display-graphic-p))
-;;   )
 ;; Completing Read Stack ---------------------------------------------
 (use-package vertico
   :bind (:map vertico-map
@@ -994,16 +980,6 @@
   :config
   (super-save-mode +1)
   )
-
-;; (use-package ibuffer-projectile
-;;   :hook (ibuffer . (lambda ()
-;;       (ibuffer-projectile-set-filter-groups)
-;;       (unless (eq ibuffer-sorting-mode 'alphabetic)
-;;                        (ibuffer-do-sort-by-alphabetic))))
-;; )
-;;
-;; (use-package ibuffer-vc
-;;   )
 
 (use-package diredfl
   :hook ((dired-mode . diredfl-mode))
