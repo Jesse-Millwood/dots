@@ -592,11 +592,22 @@
                       (expand-file-name "snippets" user-emacs-directory)))
 
 (use-package yasnippet
+  ;; Solving tab expand with org-mode: https://stewart123579.github.io/blog/posts/emacs/yasnippet-and-orgmode/
+ :init
+  (defun yas/org-very-safe-expand ()
+    (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
   :hook ((prog-mode . yas-minor-mode)
-         (org-mode . yas-minor-mode))
+         (org-mode . (lambda ()
+                       (make-variable-buffer-local 'yas/trigger-key)
+                       (setq yas/trigger-key [tab])
+                       (add-to-list 'org-tab-first-hook
+                                    'yas/org-very-safe-expand)
+                       (define-key yas/keymap [tab] 'yas/next-field))))
   :custom
   (yas-snippet-dirs '(snippets-dir))
   :config
+  (setq-default yas-snippet-dirs
+                `(,(expand-file-name "snippets/" user-emacs-directory)))
   (yas-reload-all)
   )
 
