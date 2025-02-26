@@ -130,6 +130,10 @@
                           (file-name-concat user-emacs-directory "lisp")))
   )
 
+(use-package desktop
+  :config
+  (desktop-save-mode 1))
+
 (use-package eldoc
   :custom
   (eldoc-echo-area-prefer-doc-buffer t)
