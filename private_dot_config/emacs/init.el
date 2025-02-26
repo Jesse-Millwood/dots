@@ -346,12 +346,6 @@
       (all-the-icons-install-fonts t)))
 )
 
-(use-package all-the-icons-ivy
-  :after ivy
-  :if window-system
-  :config
-  (all-the-icons-ivy-setup))
-
 (defun enable-centaur-icons (_frame)
     (when (display-graphic-p _frame)
       (setq centaur-tabs-set-icons t)
@@ -372,42 +366,61 @@
 ;;   (add-hook 'after-make-frame-functions #'enable-centaur-icons)
 ;;   (setq centaur-tabs-set-icons (display-graphic-p))
 ;;   )
+;; Completing Read Stack ---------------------------------------------
+(use-package vertico
+  :bind (:map vertico-map
+    ;; Use page-up/down to scroll vertico buffer, like ivy does by default.
+    ("<prior>" . 'vertico-scroll-down)
+    ("<next>"  . 'vertico-scroll-up))
+  :init
+  ;; Activate vertico
+  (vertico-mode))
 
-(use-package counsel
-  :bind
-  (:map global-map
-        ("M-y"     . counsel-yank-pop )
-        ("M-x"     . counsel-M-x)
-        ("C-x C-f" . counsel-find-file)
-        ("C-h f"   . counsel-describe-function)
-        ("C-h v"   . counsel-describe-variable)
-        ("C-x l"   . counsel-locate))
-  )
+(use-package vertico-directory
+  :after vertico
+  :ensure nil  ;; no need to install, it comes with vertico
+  :bind (:map vertico-map
+    ("DEL" . vertico-directory-delete-char)))
 
-(use-package swiper
-  :bind
-  (:map global-map
-        ("C-s"     . swiper))
-  )
-
-(use-package ivy
+(use-package orderless
   :custom
-  (ivy-use-virtual-buffers nil)
-  (ivy-count-format "(%d/%d) ")
-  :config
-  (ivy-mode 1)
-  (if (equal (face-background 'ivy-current-match) (face-foreground 'ivy-modified-buffer))
-      (set-face-foreground 'ivy-modified-buffer "#fb4934")
-      )
-  )
+  ;; Activate orderless completion
+  (completion-styles '(orderless basic))
+  ;; Enable partial completion for file wildcard support
+  (completion-category-overrides '((file (styles partial-completion)))))
 
-;;(use-package windmove
-;;  :bind (("C-S-j" . windmove-left)
-;;         ("C-S-l" . windmove-right)
-;;;;         ("H-S-i" . windmove-up)
-;;         ("C-S-k" . windmove-down))
-;;  :config
-;;  (global-set-key) )
+(use-package consult
+  :custom
+  ;; Disable preview
+    (consult-preview-key 'any)
+  :bind
+  (("C-x b" . 'consult-buffer)    ;; Switch buffer, including recentf and bookmarks
+   ("M-l"   . 'consult-git-grep)  ;; Search inside a project
+   ("M-y"   . 'consult-yank-pop)  ;; Paste by selecting the kill-ring
+   ("C-s"   . 'consult-line)      ;; Search current buffer, like swiper
+   ))
+
+(use-package marginalia
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind (:map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+
+  ;; The :init section is always executed.
+  :init
+
+  ;; Marginalia must be activated in the :init section of use-package such that
+  ;; the mode gets enabled right away. Note that this forces loading the
+  ;; package.
+  (marginalia-mode))
+
+(use-package all-the-icons-completion
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+  :config
+  (all-the-icons-completion-mode))
+
+;; ___________________________________________________________________
 
 (use-package ace-window
   :custom
@@ -591,10 +604,6 @@
   :after (yasnippet)
   )
 
-(use-package ivy-yasnippet
-  :after (ivy yasnippet)
-  )
-
 (use-package diminish)
 
 (use-package jinx
@@ -609,23 +618,15 @@
   :hook (prog-mode . projectile-mode)
   :custom
   (projectile-enable-caching t)
-  (projectile-completion-system 'ivy)
+  (projectile-completion-system 'auto)
   (projectile-require-project-root t)
   (projectile-switch-project-action 'projectile-vc)
   (projectile-auto-discover nil)
 
-  :config
-;;  (counsel-projectile-mode)
   :bind
   (:map projectile-mode-map
         ("C-c p" . projectile-command-map))
   )
-
-;; (use-package counsel-projectile
-;;   :after projectile
-;;   :custom
-;;   (counsel-projectile-switch-project-action 'counsel-projectile-switch-project-action-dired)
-;;   )
 
 (use-package diff-hl
   :hook ((prog-mode . diff-hl-mode)
@@ -905,9 +906,7 @@
 (use-package rtags
   :ensure-system-package (rc rdm)
   )
-(use-package ivy-rtags
-  :after rtags
-  )
+
 (use-package xcscope
   :ensure-system-package cscope
   )
