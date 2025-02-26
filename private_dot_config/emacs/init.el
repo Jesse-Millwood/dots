@@ -1161,9 +1161,19 @@ With a prefix ARG, remove start location."
 
 
 ;; Contitonally Load Custom Packages _________________________________
+;; (use-package chezmoi
+;;   :load-path (lambda () (file-name-concat user-emacs-directory "lisp"))
+;;   :commands (chezmoi|magit-status chezmoi|ediff))
 (use-package chezmoi
-  :load-path (lambda () (file-name-concat user-emacs-directory "lisp"))
-  :commands (chezmoi|magit-status chezmoi|ediff))
+(use-package chezmoi
+  :custom (chezmoi-command "~/.local/bin/chezmoi")
+  :commands (chezmoi-find chezmoi-ediff chezmoi-write))
+(use-package chezmoi-ediff
+  :ensure nil ;; part of chezmoi
+  )
+(use-package chezmoi-magit
+  :ensure nil ;; part of chezmoi
+  )
 
 (use-package eglot-setup
   :load-path (lambda () (file-name-concat user-emacs-directory "lisp"))
