@@ -618,7 +618,8 @@
 (use-package diminish)
 
 (use-package jinx
-  ; :hook (emacs-startup . global-jinx-mode)
+  ;; :hook (emacs-startup . global-jinx-mode)
+  :hook (org-mode . jinx-mode)
   :bind (("M-$" . jinx-correct)
          ("C-M-$" . jinx-languages))
   )
