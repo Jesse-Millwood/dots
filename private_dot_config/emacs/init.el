@@ -916,9 +916,6 @@
   :hook (c-common-mode . (lambda () (c-set-style "stroustrup")))
   )
 
-(use-package rtags
-  :ensure-system-package (rc rdm)
-  )
 
 (use-package xcscope
   :ensure-system-package cscope
