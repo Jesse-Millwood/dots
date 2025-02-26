@@ -104,7 +104,8 @@
   (:map global-map
         ("C-d" . delete-forward-char)
         ("C-x K" . kill-buffer-and-window)
-        ("C-x C-b" . ibuffer-other-window))
+        ("C-x C-b" . ibuffer-other-window)
+        ("RET" . newline-and-indent))
   :custom
   (scroll-step 1)
   (scroll-conservatively 1000)
@@ -426,6 +427,56 @@
 (use-package mc-extras
   :after (multiple-cursors)
   )
+
+(use-package indent-bars
+  :hook (prog-mode)
+  :custom
+  (indent-bars-no-descend-lists t) ; no extra bars in continued func arg lists
+  (indent-bars-treesit-support t)
+  (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  ;; Add other languages as needed
+  (indent-bars-treesit-scope '((python function_definition class_definition for_statement
+                                       if_statement with_statement while_statement)
+                               (rust trait_item impl_item
+                                     macro_definition macro_invocation
+                                     struct_item enum_item mod_item
+                                     const_item let_declaration
+                                     function_item for_expression
+                                     if_expression loop_expression
+                                     while_expression match_expression
+                                     match_arm call_expression
+                                     token_tree token_tree_pattern
+                                     token_repetition)))
+  (indent-bars-treesit-wrap '((c argument_list parameter_list init_declarator
+                                 parenthesized_expression)
+                              (python argument_list parameters
+                                      list list_comprehension
+                                      dictionary dictionary_comprehension
+                                      parenthesized_expression subscript)
+                              (rust arguments parameters)
+                              (toml
+                               table array comment)
+                              (yaml
+                               block_mapping_pair comment)
+                              ))
+  )
+
+
+(use-package dtrt-indent
+  :hook (prog-mode)
+  :commands (dtrt-indent-global-mode
+             dtrt-indent-mode
+             dtrt-indent-adapt
+             dtrt-indent-undo
+             dtrt-indent-diagnosis
+             dtrt-indent-highlight)
+  :config
+  (dtrt-indent-global-mode))
+
+(use-package electric
+  :custom
+  (electric-indent-inhibit t)
+)
 
 (use-package electric-pair-mode
   :ensure nil
