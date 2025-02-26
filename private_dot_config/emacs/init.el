@@ -802,6 +802,7 @@
   (org-refile-allow-creating-parent-nodes 'confirm)
   (org-refile-use-outline-path 'file)
   (org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (org-return-follows-link t)
   :config
 ;;  (require 'ox-confluence)
 ;;  (require 'ol-man)
