@@ -950,6 +950,14 @@
 (use-package ada-mode
   :pin elpa
   )
+(use-package ada-ts-mode
+  :hook (ada-ts-mode . eglot-ensure)
+  )
+(use-package gpr-mode)
+(use-package gpr-ts-mode)
+(use-package gpr-yasnippets)
+
+(use-package ob-ada-spark)
 
 (use-package python-mode
   :mode "\\.py\\'"
