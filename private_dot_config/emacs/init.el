@@ -1168,7 +1168,6 @@ With a prefix ARG, remove start location."
 ;;   :load-path (lambda () (file-name-concat user-emacs-directory "lisp"))
 ;;   :commands (chezmoi|magit-status chezmoi|ediff))
 (use-package chezmoi
-(use-package chezmoi
   :custom (chezmoi-command "~/.local/bin/chezmoi")
   :commands (chezmoi-find chezmoi-ediff chezmoi-write))
 (use-package chezmoi-ediff
