@@ -626,6 +626,10 @@
         ("C-c p" . projectile-command-map))
   )
 
+(use-package project
+  :custom (project-vc-extra-root-markers
+           '("adainclude" "alire.toml" ".project" ".projectile" ".vscode")))
+
 (use-package diff-hl
   :hook ((prog-mode . diff-hl-mode)
          (dired-mode . diff-hl-dired-mode)
