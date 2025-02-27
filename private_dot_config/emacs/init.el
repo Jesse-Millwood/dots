@@ -837,6 +837,11 @@
           (alltodo "")))))
   )
 
+(use-package org-contrib
+  :after org
+  :config
+  (ox-extras-activate '(latex-header-blocks ignore-headlines)))
+
 (use-package ob-bitfield
   :after org)
 
