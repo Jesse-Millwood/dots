@@ -987,6 +987,16 @@
 (use-package vterm
   :custom
   (vterm-max-scrollback 5000)
+  (defun mvterm (name)
+    "Open a new vterm buffer with a specified NAME"
+    (interactive "sEnter buffer name: ")
+    (let ((buffer (get-buffer-create (concat "*vterm-" name "*"))))
+      (with-current-buffer buffer
+        (unless (derived-mode-p 'vterm)
+          (vterm-mode)))
+      (switch-to-buffer buffer))
+    )
+
   )
 
 (use-package super-save
