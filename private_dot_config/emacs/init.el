@@ -128,6 +128,8 @@
                           (file-name-concat user-emacs-directory "lisp")))
   (load (expand-file-name "fontsetup.el"
                           (file-name-concat user-emacs-directory "lisp")))
+  (add-to-list 'exec-path (substitute-in-file-name
+                           (file-name-concat "$HOME" ".local" "bin")))
   )
 
 (use-package desktop
@@ -379,11 +381,13 @@
   :custom
   ;; Disable preview
     (consult-preview-key 'any)
+    (consult-line-start-from-top t)
   :bind
   (("C-x b" . 'consult-buffer)    ;; Switch buffer, including recentf and bookmarks
    ("M-l"   . 'consult-git-grep)  ;; Search inside a project
    ("M-y"   . 'consult-yank-pop)  ;; Paste by selecting the kill-ring
    ("C-s"   . 'consult-line)      ;; Search current buffer, like swiper
+   ("M-g i" . 'consult-imenu)
    ))
 
 (use-package marginalia
@@ -717,7 +721,7 @@
           treemacs-goto-tag-strategy          'refetch-index
           treemacs-indentation                2
           treemacs-indentation-string         " "
-          treemacs-is-never-other-window      nil
+          treemacs-is-never-other-window      t
           treemacs-no-png-images              nil
           treemacs-project-follow-cleanup     nil
           treemacs-persist-file               (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
@@ -846,10 +850,45 @@
   :after org)
 
 (use-package ob-mermaid
+  ;; Installed docker image
+  ;; Wrote wrapper and installed to ~/.local/bin/dockerize-mermaid
+  ;;
+  ;; #!/usr/bin/env python3
+
+  ;; import argparse
+  ;; from pathlib import Path
+  ;; import os
+  ;; import subprocess
+  ;; import shutil
+
+  ;; parser = argparse.ArgumentParser()
+  ;; parser.add_argument('-i', type=Path, dest='input')
+  ;; parser.add_argument('-o', type=Path, dest='output')
+  ;; parser.add_argument('-c', type=Path, dest='config')
+  ;; parser.add_argument('-C', type=Path, dest='css')
+  ;; parser.add_argument('-p', type=Path, dest='puppeteer')
+
+  ;; known_args, passthrough_args = parser.parse_known_args()
+
+  ;; input_dir = Path(known_args.input).parent
+  ;; output_dir = Path(known_args.output).parent
+  ;; dst_output_file = Path(known_args.output)
+  ;; input_file = Path(known_args.input).name
+  ;; src_output_file = Path(input_dir, dst_output_file.name)
+
+  ;; cmd = ['docker', 'run', '-u', f'{os.geteuid()}:{os.getegid()}',
+  ;;        '-v', f'{input_dir}:/data',
+  ;;        'minlag/mermaid-cli',
+  ;;        '-i', input_file,
+  ;;        '-o', dst_output_file.name]
+  ;; cmd += passthrough_args
+
+  ;; proc = subprocess.run(cmd, cwd=output_dir)
+  ;; shutil.copy(src_output_file, dst_output_file)
   :custom
-  ;; (ob-mermaid-cli-path (shell-command-to-string
-  ;;                       "npx -p @mermaid-js/mermaid-cli@latest command -v mmdc"))
-  (ob-mermaid-cli-path "/home/hfcs/.npm/_npx/23232c69e5d221f3/node_modules/.bin/mmdc")
+  (ob-mermaid-cli-path (substitute-in-file-name
+                        (file-name-concat "${HOME}" ".local" "bin"
+                                          "dockerize-mermaid")))
   )
 
 (use-package ox-asciidoc)
@@ -1164,6 +1203,9 @@ With a prefix ARG, remove start location."
 
 
 ;; Contitonally Load Custom Packages _________________________________
+(use-package chezmoi
+  :load-path (lambda () (file-name-concat user-emacs-directory "lisp"))
+  :commands (chezmoi|magit-status chezmoi|ediff))
 ;; (use-package chezmoi
 ;;   :load-path (lambda () (file-name-concat user-emacs-directory "lisp"))
 ;;   :commands (chezmoi|magit-status chezmoi|ediff))
@@ -1222,3 +1264,4 @@ With a prefix ARG, remove start location."
              (float-time
               (time-subtract after-init-time before-init-time))) gcs-done)
 (put 'erase-buffer 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
