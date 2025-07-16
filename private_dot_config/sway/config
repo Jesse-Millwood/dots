@@ -69,7 +69,7 @@ exec swayidle timeout 600 'swaymsg "output * power off"' \
 
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-
+input type:keyboard xkb_numlock enabled
 ### Key bindings _____________________________________________________
 #
 # Basics:
@@ -183,9 +183,7 @@ workspace 4 output DP-4
 workspace 6 output DP-4
 workspace 8 output DP-4
 workspace 0 output DP-4
-#
-# Layout stuff:
-#
+
 # You can "split" the current object of your focus with
 #: Split current container horizontally
 bindsym $mod+h splith
@@ -200,7 +198,6 @@ bindsym $mod+w layout tabbed
 #: Toggle split layout style
 bindsym $mod+q layout toggle split
 
-
 #: Full screen
 bindsym $mod+f fullscreen
 #: Toggle floating and tiling modes
@@ -213,11 +210,12 @@ bindsym $mod+a focus parent
 # Scratchpad:
 # Sway has a "scratchpad", which is a bag of holding for windows.
 # You can send windows there and get them back later.
-
-bindsym $mod+Shift+minus move scratchpad #: Move the currently focused window to the scratchpad
+#: Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
 
 # If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show #: Show the next scratchpad window or hid the focused scratchpad window
+#: Show the next scratchpad window or hid the focused scratchpad window
+bindsym $mod+minus scratchpad show
 #
 # Resizing containers:
 #
@@ -248,17 +246,6 @@ mode "resize" {
 #: Enter resize mode
 bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-bar {
-    swaybar_command waybar
-}
-
-### Autostart ________________________________________________________
-exec mako
-
-### Extras ___________________________________________________________
 #: Show keybinds
 bindsym $mod+Shift+slash exec ~/.local/bin/fuzzelshowkeybinds.py
 #: Launch Emacs
@@ -267,17 +254,20 @@ bindsym $mod+e exec emacs
 bindsym $mod+Shift+w exec flatpak run org.mozilla.firefox
 #: Launch file browser
 bindsym $mod+Shift+f exec nautilus
-
-include /etc/sway/config.d/*
-
-# Network
-exec_always nm-applet --indicator
-exec globalprotect launch-ui
-
-# Clipboard
-exec wl-paste --watch cliphist store
-bindsym $mod+Insert exec cliphist list | fuzzel --prompt " " --dmenu | cliphist decode | wl-copy #: Clipboard menu
-
-# Screen shot
+#: Clipboard menu
+bindsym $mod+Insert exec cliphist list | fuzzel --prompt " " --dmenu | cliphist decode | wl-copy
 #: Screenshot menu
 bindsym Print exec ~/.local/bin/fuzzelshoot.sh
+
+# Status Bar _________________________________________________________
+bar {
+    swaybar_command waybar
+}
+
+### Autostart ________________________________________________________
+exec mako
+exec_always nm-applet --indicator
+exec globalprotect launch-ui
+exec wl-paste --watch cliphist store
+
+include /etc/sway/config.d/*
