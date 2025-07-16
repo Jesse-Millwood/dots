@@ -14,13 +14,17 @@
     "modules-center": [
         "clock",
         "keyboard-state",
-        "mode"
+        "sway/mode"
     ],
     "modules-right": [
         "tray",
         "pulseaudio",
         "network",
+        "user",
     ],
+    "user": {
+        "avatar": "~/Pictures/Avatars/Game Boy Camera.png",
+    },
     "sway/mode": {
         "format": " {}",
         "max-length": 50

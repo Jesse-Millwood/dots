@@ -26,9 +26,12 @@ args = parser.parse_args()
 
 binds = []
 
-bindsym_re = r"^\s*bindsym (?P<binding>[$a-zA-Z0-9+]*) (?P<command>[a-zA-Z0-9/~. ]*)#: (?P<description>[a-zA-Z0-9 ()]*)$"
+bindsym_desc_re = r"^\s*#: (?P<description>[a-zA-Z0-9 ()]*)$"
+bindsym_re = r"^\s*bindsym (?P<binding>[$a-zA-Z0-9+]*) (?P<command>[a-zA-Z0-9/~. $]*)"
 mode_re = r"^\s*mode \"(?P<mode>[a-zA-Z_0-9]*)\" {"
 closing_re = r".*}"
+looking_for_bindsym = False
+current_desc = ""
 with open(args.sway_config, 'r') as config:
     in_mode = False
     num_opening_curly = 0
@@ -42,12 +45,19 @@ with open(args.sway_config, 'r') as config:
             continue
         elif num_opening_curly == 0:
             current_mode = 'default'
-        r = re.search(bindsym_re, line)
-        if r is not None:
+        desc_r = re.search(bindsym_desc_re, line)
+        bindsym_r = re.search(bindsym_re, line)
+
+        if desc_r is not None:
+            looking_for_bindsym = True
+            current_desc = desc_r.group('description')
+
+        elif (bindsym_r is not None) and looking_for_bindsym:
             binds.append(Binding(mode=current_mode,
-                                 binding=r.group('binding'),
-                                 command=r.group('command'),
-                                 description=r.group('description')))
+                                 binding=bindsym_r.group('binding'),
+                                 command=bindsym_r.group('command'),
+                                 description=current_desc))
+            looking_for_bindsym = False
 
 fuzzel_str = ""
 max_str_len = 0
