@@ -1,0 +1,229 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+### Variables ________________________________________________________
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left j
+set $down k
+set $up i
+set $right l
+# Your preferred terminal emulator
+set $term /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=ptyxis app.devsuite.Ptyxis --new-window
+# Your preferred application launcher
+set $menu fuzzel
+
+include /etc/sway/config-vars.d/*
+
+### Themeing _________________________________________________________
+
+# Color binds
+# from (https://github.com/CelticBoozer/dotfiles/blob/master/.config/sway/config.d/theme.conf)
+set $col_focused #98971a
+set $col_focused_inactive #fe8019
+set $col_unfocused #3c3836
+set $col_text_dark #282828
+set $col_text_light #ebdbb2
+set $col_urgent #fb4934
+set $col_unfocused_border #689d6a
+
+# class                  border                 background             text             indicator              child_border
+client.focused           $col_focused           $col_focused           $col_text_dark   $col_focused           $col_focused
+client.focused_inactive  $col_focused_inactive  $col_focused_inactive  $col_text_dark   $col_focused_inactive  $col_focused_inactive
+client.unfocused         $col_unfocused_border  $col_unfocused         $col_text_light  $col_unfocused         $col_unfocused
+client.urgent            $col_text_dark         $col_urgent            $col_text_dark   $col_urgent            $col_urgent
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Yaru-blue-dark'
+    gsettings set $gnome-schema color-scheme 'prefer-dark'
+    gsettings set $gnome-schema icon-theme 'Paper'
+    gsettings set $gnome-schema cursor-theme 'Paper'
+    gsettings set $gnome-schema font-name 'Monofur Nerd Font 12'
+    gsettings set $gnome-schema monospace-font-name 'Monofur Nerd Font Mono 13'
+}
+
+
+### Output configuration _____________________________________________
+#
+# Default wallpaper (sway ones in /usr/share/backgrounds/sway/)
+output * bg ~/Pictures/michigan-space-6.jpg fill
+
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+# Used wdisplays to graphically place the monitors and get the values
+# DELL P2723DE D1VDS44
+output DP-4 pos 1920 0 res 2560x1440
+# HP E243 CNK0174536
+output DP-5 pos 0 0 res 1920x1080
+
+### Idle configuration _______________________________________________
+
+exec swayidle timeout 600 'swaymsg "output * power off"' \
+              resume 'swaymsg "output * power on"'
+
+### Input configuration ______________________________________________
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings _____________________________________________________
+#
+# Basics:
+#
+bindsym $mod+Return exec $term #: Open Terminal
+bindsym $mod+Shift+q kill #: Kill Focused window
+bindsym $mod+space exec $menu #: Start launcher
+bindsym $mod+Shift+c reload #: Reload the configuration file
+bindsym $mod+Shift+e exec ~/.local/bin/fuzzellock.sh #: Power Menu
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+# Moving around:
+# Move your focus around
+bindsym $mod+$left focus left #: Move focus left (letters)
+bindsym $mod+$down focus down #: Move focus down (letters)
+bindsym $mod+$up focus up #: Move focus up (letters)
+bindsym $mod+$right focus right #: Move focus right (letters)
+bindsym $mod+Left focus left #: Move focus left (arrow)
+bindsym $mod+Down focus down #: Move focus down (arrow)
+bindsym $mod+Up focus up #: Move focus up (arrow)
+bindsym $mod+Right focus right #: Move focus right (arrow)
+
+bindsym $mod+Shift+$left move left #: Move focused window left (letters)
+bindsym $mod+Shift+$down move down #: Move focused window down (letters)
+bindsym $mod+Shift+$up move up #: Move focused window up (letters)
+bindsym $mod+Shift+$right move right #: Move focused window right (letters)
+bindsym $mod+Shift+Left move left #: Move focused window left (arrow)
+bindsym $mod+Shift+Down move down #: Move focused window down (arrow)
+bindsym $mod+Shift+Up move up #: Move focused window up (arrow)
+bindsym $mod+Shift+Right move right #: Move focused window right (arrow)
+
+# Workspaces:
+bindsym $mod+1 workspace number 1 #: Switch to workspace 1
+bindsym $mod+2 workspace number 2 #: Switch to workspace 2
+bindsym $mod+3 workspace number 3 #: Switch to workspace 3
+bindsym $mod+4 workspace number 4 #: Switch to workspace 4
+bindsym $mod+5 workspace number 5 #: Switch to workspace 5
+bindsym $mod+6 workspace number 6 #: Switch to workspace 6
+bindsym $mod+7 workspace number 7 #: Switch to workspace 7
+bindsym $mod+8 workspace number 8 #: Switch to workspace 8
+bindsym $mod+9 workspace number 9 #: Switch to workspace 9
+bindsym $mod+0 workspace number 10 #: Switch to workspace 10
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1 #: Move focused container to workspace 1
+bindsym $mod+Shift+2 move container to workspace number 2 #: Move focused container to workspace 2
+bindsym $mod+Shift+3 move container to workspace number 3 #: Move focused container to workspace 3
+bindsym $mod+Shift+4 move container to workspace number 4 #: Move focused container to workspace 4
+bindsym $mod+Shift+5 move container to workspace number 5 #: Move focused container to workspace 5
+bindsym $mod+Shift+6 move container to workspace number 6 #: Move focused container to workspace 6
+bindsym $mod+Shift+7 move container to workspace number 7 #: Move focused container to workspace 7
+bindsym $mod+Shift+8 move container to workspace number 8 #: Move focused container to workspace 8
+bindsym $mod+Shift+9 move container to workspace number 9 #: Move focused container to workspace 9
+bindsym $mod+Shift+0 move container to workspace number 10 #: Move focused container to workspace 10
+# Note: workspaces can have any name you want, not just numbers.
+# We just use 1-10 as the default.
+workspace 1 output DP-5
+workspace 2 output DP-4
+workspace 3 output DP-5
+workspace 4 output DP-4
+workspace 5 output DP-5
+workspace 6 output DP-4
+workspace 7 output DP-5
+workspace 8 output DP-4
+workspace 9 output DP-5
+workspace 0 output DP-4
+#
+# Layout stuff:
+#
+# You can "split" the current object of your focus with
+bindsym $mod+h splith #: Split current container horizontally
+bindsym $mod+v splitv #: Split current container vertically
+
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking #: Switch layout style to stacking
+bindsym $mod+w layout tabbed #: Switch layout style to tabbed
+bindsym $mod+q layout toggle split #: Toggle split layout style
+
+
+bindsym $mod+f fullscreen #: Full screen
+bindsym $mod+Shift+space floating toggle #: Toggle floating and tiling modes
+bindsym $mod+Alt+space focus mode_toggle #: Swap focus between the tiling area and the floating area
+bindsym $mod+a focus parent #: Move focus to parent container
+
+# Scratchpad:
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+bindsym $mod+Shift+minus move scratchpad #: Move the currently focused window to the scratchpad
+
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show #: Show the next scratchpad window or hid the focused scratchpad window
+#
+# Resizing containers:
+#
+mode "resize" {
+    bindsym $left resize shrink width 10px #: Shrink the container width (letters)
+    bindsym $down resize grow height 10px #: Grow the container height (letters)
+    bindsym $up resize shrink height 10px #: Shrink the container height (letters)
+    bindsym $right resize grow width 10px #: Grow the container width (letters)
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px #: Shrink the container width (arrows)
+    bindsym Down resize grow height 10px #: Grow the container height (arrows)
+    bindsym Up resize shrink height 10px #: Shrink the container height (arrows)
+    bindsym Right resize grow width 10px #: Grow the container width (arrows)
+
+    # Return to default mode
+    bindsym Return mode "default" #: Return to default mode
+    bindsym Escape mode "default" #: Return to default mode
+}
+bindsym $mod+r mode "resize" #: Enter resize mode
+
+#
+# Status Bar:
+#
+bar {
+    swaybar_command waybar
+}
+
+### Autostart ________________________________________________________
+exec mako
+
+### Extras ___________________________________________________________
+bindsym $mod+Shift+slash exec ~/.local/bin/fuzzelshowkeybinds.py #: Show keybinds
+bindsym $mod+e exec emacs #: Launch Emacs
+bindsym $mod+Shift+w exec flatpak run org.mozilla.firefox #: Launch web browser
+bindsym $mod+Shift+f exec nautilus #: Launch file browser
+
+include /etc/sway/config.d/*
+
+# Network
+exec_always nm-applet --indicator
+exec globalprotect launch-ui
+
+# Clipboard
+exec wl-paste --watch cliphist store
+bindsym $mod+Insert exec cliphist list | fuzzel --prompt " " --dmenu | cliphist decode | wl-copy #: Clipboard menu
+
+# Screen shot
+bindsym Print exec ~/.local/bin/fuzzelshoot.sh #: Screenshot menu
