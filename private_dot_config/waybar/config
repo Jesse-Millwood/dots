@@ -26,7 +26,7 @@
         "avatar": "~/Pictures/Avatars/Game Boy Camera.png",
     },
     "sway/mode": {
-        "format": " {}",
+        "format": " {}",
         "max-length": 50
     },
     "keyboard-state": {
