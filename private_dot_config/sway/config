@@ -270,4 +270,7 @@ exec_always nm-applet --indicator
 exec globalprotect launch-ui
 exec wl-paste --watch cliphist store
 
+### Set xdg settings _________________________________________________
+exec xdg-settings set default-web-browser org.mozilla.firefox.desktop
+
 include /etc/sway/config.d/*
