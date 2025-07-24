@@ -182,7 +182,7 @@ workspace 2 output DP-4
 workspace 4 output DP-4
 workspace 6 output DP-4
 workspace 8 output DP-4
-workspace 0 output DP-4
+workspace 10 output DP-4
 
 # You can "split" the current object of your focus with
 #: Split current container horizontally
